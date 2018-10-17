@@ -27,12 +27,12 @@ class FTPServer(threading.Thread):
     # Commands
     def list_files(self, ip, port, conn):
         print("[CMD] Client [%s:%s] has executed command: LIST\n" % (ip, port))
+        #files_dirs = os.walk(self.dir)
+        #files_dirs = "'\n".join( [x[0].replace(self.dir, '') for x in files_dirs if x[0].replace(self.dir, '') != ''])
+        file_list = os.listdir(os.getcwd())
+        conn.sendall("".join(["List of all files in path: %s/\n" % os.getcwd(), "\n- "+"\n- ".join(file_list)]).encode('utf'))
 
-        files_dirs = os.walk(self.dir)
-        file_list = "'\n- ".join( [x[0].replace(self.dir, '') for x in files_dirs if x[0].replace(self.dir, '') != ''])
-        conn.sendall("".join(["List of all files in path: %s/\n" % os.getcwd(), file_list]).encode('utf'))
-
-        print("[OK!] Sending file to Client [%s:%s] complete\n" % (ip, port))
+        print("[OK!] Successfully sent file list of current directory to Client [%s:%s]\n" % (ip, port))
 
 
     def send_file_to_client(self, conn, ip, port, filename):
@@ -104,7 +104,7 @@ class FTPServer(threading.Thread):
 
     def start(self):
 
-        #utils.clear_terminal()
+        utils.clear_terminal()
 
         print(
             "\nLaunching server at:"
