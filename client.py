@@ -1,7 +1,6 @@
 import socket
 import sys
 import select
-from contextlib import suppress
 
 """
 Client.py

@@ -3,7 +3,6 @@ import socket
 import select
 import utils
 import threading
-from contextlib import suppress
 
 
 class FTPServer(threading.Thread):
@@ -23,35 +22,53 @@ class FTPServer(threading.Thread):
         self.server_is_running = False
         self.conns = []
 
+
+
     # Commands
-    def list_files(self):
+    def list_files(self, ip, port, conn):
+        print("[CMD] Client [%s:%s] has executed command: LIST\n" % (ip, port))
+
         files_dirs = os.walk(self.dir)
         file_list = "'\n- ".join( [x[0].replace(self.dir, '') for x in files_dirs if x[0].replace(self.dir, '') != ''])
-        return "".join(["List of all files in path: %s/\n" % os.getcwd(), file_list])
+        conn.sendall("".join(["List of all files in path: %s/\n" % os.getcwd(), file_list]).encode('utf'))
 
-    def send_file_to_client(self, conn, filename):
+        print("[OK!] Sending file to Client [%s:%s] complete\n" % (ip, port))
+
+
+    def send_file_to_client(self, conn, ip, port, filename):
+        print("[CMD] Client [%s:%s] has executed command: GET %s\n" % (ip, port, filename))
+
         if filename not in os.listdir(os.getcwd()):
-            print("Not Found On Server")
+            print("[ERR] File '%s' could not be found in server directory\n" % filename)
         else:
-            print(filename + " File Found")
+            print("[OK!] File '%s' found in server directory\n" % filename)
             upload = open(os.getcwd()+'/'+filename, 'rb')
             data = upload.read(4096)
             while data:
                 conn.sendall(data)
                 data = upload.read(4096)
-            print("Sending file: complete")
 
-    def save_file_from_client(self, conn, filename):
-        return "uploading file from client "+str(filename)
+            print("[OK!] Client [%s:%s] has downloaded file '%s' from server\n" % (ip, port, filename))
+
+
+
+    def save_file_from_client(self, conn, ip, port, filename):
+        print("[CMD] Client [%s:%s] has executed command: PUT %s\n" % (ip, port, filename))
+        # do stuff here
+        print("[OK!] Client [%s:%s] has successfully upload file %s to the server\n" % (ip, port, filename))
+
+
 
     # Main Program
     def loop_socket_check(self):
 
         while self.server_is_running:
 
-            with suppress(socket.error):
+            try:
                 # Using select.select to obtain the read ready sockets in the connections list (self.conns)
                 read_connections = select.select(self.conns, [], [], 30)[0]
+            except socket.error:
+                pass
 
             for connection in read_connections:
 
@@ -73,19 +90,11 @@ class FTPServer(threading.Thread):
                             ip, port = connection.getpeername()
 
                             if args[0] == "list":
-                                print("[CMD] Client [%s:%s] has executed command: LIST" % (ip, port))
-                                self.list_files()
-
+                                self.list_files(ip, port, connection)
                             elif args[0] == "put":
-                                filename = args[1]
-                                print("[CMD] Client [%s:%s] has executed command: PUT %s" % (ip, port, filename))
-                                res = self.save_file_from_client(connection, filename)
-                                print(res)
-
+                                self.save_file_from_client(connection, ip, port, args[1])
                             elif args[0] == "get":
-                                filename = args[1]
-                                print("[CMD] Client [%s:%s] has executed command: GET %s" % (ip, port, filename))
-                                self.send_file_to_client(connection, filename)
+                                self.send_file_to_client(connection, ip, port, args[1])
 
                     except socket.error:
                         ip, port = connection.getpeername()
