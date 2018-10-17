@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import select
 import utils
@@ -21,23 +22,17 @@ class FTPServer:
         self.server_is_running = False
         self.conns = []
 
-        self.commands = {
-            "put": self.put_file,
-            "get": self.get_file,
-            "list": self.list_files
-        }
-
     # Commands
-    def list_files(self, flags):
+    def list_files(self):
         files_dirs = os.walk(self.dir)
-        file_list = [" ".join([utils.get_filesize(x[0]), x[0].strip(self.dir)]) for x in files_dirs]
+        file_list = [" ".join([utils.get_filesize(x[0]), x[0].replace(self.dir, '')]) for x in files_dirs]
         return utils.files_as_tree(file_list)
 
-    def put_file(self, flags):
-        return "putting file onto server"
+    def put_file(self, args):
+        return "putting file onto server"+str(args)
 
-    def get_file(self, flags):
-        return "getting file for download"
+    def get_file(self, args):
+        return "getting file for download"+str(args)
 
     # Main Program
     def loop_socket_check(self):
@@ -60,20 +55,32 @@ class FTPServer:
 
                 else:
                     try:
-                        command = connection.recv(1024).decode('utf')
+                        args = connection.recv(1024).decode('utf').split(" ")
 
-                        if command:
+                        if args:
                             ip, port = connection.getpeername()
-                            print("[CMD] Client [%s:%s] has executed command: %s\n" % (ip, port, command))
+                            valid_cmd = True
+                            command = args[0]
+                            args = args[1:]
 
-                            command = command.split(" ")
+                            if command == "list":
+                                result = self.list_files()
 
-                            if command[0] in self.commands:
-                                flags = command[1:] if len(command) > 1 else []
-                                response = self.commands[command[0]](flags)
+                            elif command == "put":
+                                result = self.put_file(args)
+
+                            elif command == "get":
+                                result = self.put_file(args)
                             else:
-                                response = "Invalid command. Please try [put], [get], or [list]"
-                            cli_sock.sendall(response.encode())
+                                result = "Invalid flags."
+                                valid_cmd = False
+
+                            if valid_cmd:
+                                utils.error_print("[CMD] Client [%s:%s] has executed command: %s\n" % (ip, port, command))
+                            else:
+                                print("[ERR] Client [%s:%s] tried to execute invalid command: %s\n" % (ip, port, command))
+
+                            connection.sendall(result.encode())
 
                     except socket.error:
                         ip, port = connection.getpeername()
@@ -83,7 +90,7 @@ class FTPServer:
 
     def start(self):
 
-        utils.clear_terminal()
+        #utils.clear_terminal()
 
         print(
             "\nLaunching server at:"
