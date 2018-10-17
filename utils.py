@@ -9,12 +9,8 @@ def clear_terminal():
     os.system('clear' if os.name != 'nt' else 'cls')
 
 
-def error_print(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
-
-
 def check_args_port():
-    error_msg = "Error, port number expected as argument (e.g. python server.py 8080)"
+    error_msg = "Error, port number expected as a parameter."
 
     if len(sys.argv) < 2:
         raise SystemExit(error_msg)

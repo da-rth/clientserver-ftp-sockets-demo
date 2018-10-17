@@ -1,12 +1,12 @@
 import os
-import sys
 import socket
 import select
 import utils
+import threading
 from contextlib import suppress
 
 
-class FTPServer:
+class FTPServer(threading.Thread):
 
     MSG_BUFFER = 8192
     MAX_CONNECTIONS = 10
@@ -15,6 +15,7 @@ class FTPServer:
         """
         :param port:
         """
+        threading.Thread.__init__(self)
         self.dir = os.getcwd()
         self.port = utils.check_args_port()
         self.public_ip = utils.get_ip_address()
@@ -25,14 +26,23 @@ class FTPServer:
     # Commands
     def list_files(self):
         files_dirs = os.walk(self.dir)
-        file_list = [" ".join([utils.get_filesize(x[0]), x[0].replace(self.dir, '')]) for x in files_dirs]
-        return utils.files_as_tree(file_list)
+        file_list = "'\n- ".join( [x[0].replace(self.dir, '') for x in files_dirs if x[0].replace(self.dir, '') != ''])
+        return "".join(["List of all files in path: %s/\n" % os.getcwd(), file_list])
 
-    def put_file(self, args):
-        return "putting file onto server"+str(args)
+    def send_file_to_client(self, conn, filename):
+        if filename not in os.listdir(os.getcwd()):
+            print("Not Found On Server")
+        else:
+            print(filename + " File Found")
+            upload = open(os.getcwd()+'/'+filename, 'rb')
+            data = upload.read(4096)
+            while data:
+                conn.sendall(data)
+                data = upload.read(4096)
+            print("Sending file: complete")
 
-    def get_file(self, args):
-        return "getting file for download"+str(args)
+    def save_file_from_client(self, conn, filename):
+        return "uploading file from client "+str(filename)
 
     # Main Program
     def loop_socket_check(self):
@@ -55,32 +65,27 @@ class FTPServer:
 
                 else:
                     try:
-                        args = connection.recv(1024).decode('utf').split(" ")
+                        args = connection.recv(1024).decode('utf')
+                        args = args.split(" ")
 
                         if args:
+
                             ip, port = connection.getpeername()
-                            valid_cmd = True
-                            command = args[0]
-                            args = args[1:]
 
-                            if command == "list":
-                                result = self.list_files()
+                            if args[0] == "list":
+                                print("[CMD] Client [%s:%s] has executed command: LIST" % (ip, port))
+                                self.list_files()
 
-                            elif command == "put":
-                                result = self.put_file(args)
+                            elif args[0] == "put":
+                                filename = args[1]
+                                print("[CMD] Client [%s:%s] has executed command: PUT %s" % (ip, port, filename))
+                                res = self.save_file_from_client(connection, filename)
+                                print(res)
 
-                            elif command == "get":
-                                result = self.put_file(args)
-                            else:
-                                result = "Invalid flags."
-                                valid_cmd = False
-
-                            if valid_cmd:
-                                utils.error_print("[CMD] Client [%s:%s] has executed command: %s\n" % (ip, port, command))
-                            else:
-                                print("[ERR] Client [%s:%s] tried to execute invalid command: %s\n" % (ip, port, command))
-
-                            connection.sendall(result.encode())
+                            elif args[0] == "get":
+                                filename = args[1]
+                                print("[CMD] Client [%s:%s] has executed command: GET %s" % (ip, port, filename))
+                                self.send_file_to_client(connection, filename)
 
                     except socket.error:
                         ip, port = connection.getpeername()
