@@ -10,7 +10,7 @@ def clear_terminal():
 
 
 def check_args_port():
-    error_msg = "Error, port number expected as a parameter."
+    error_msg = "[ERR] Port number expected."
 
     if len(sys.argv) < 2:
         raise SystemExit(error_msg)
@@ -57,9 +57,8 @@ def files_as_tree(files_list, subtree_level=0, res=None):
 
 
 def get_filesize(filepath):
-
     size = float(os.path.getsize(filepath))
-    sizes = [' b', 'kb', 'mb', 'gb']
+    sizes = ['b', 'kb', 'mb', 'gb']
     i = 0
     while size > 1024 and i < 5:
         size = size / 1024.00

@@ -1,113 +1,191 @@
+from __future__ import print_function
 import socket
 import sys
-import select
+import os
+import re
 
 """
 Client.py
 Author: 2086380A
 NOSE 2 - Assessment 1
 
-Requires parameters: <hostname> <port> <put filename | get filename | list>
+Requires parameters: <domain/ip> <port> <put filename | get filename | list>
+FTPClient object requires:
+- HOST (IP address or domain)
+- PORT (Integer value between 0-99999)
+- 
 """
+# TODO: Deny over-writing existing files in server directory.
+# TODO: Check error handling and reporting
+# TODO: Add to server.log?
 
 
-def check_argv():
-    if len(sys.argv) < 4:
-        raise SystemExit(
-            "\nThe hostname and port parameters are required:"
-            "\nTry:     python client.py <hostname/ip> <port> <parameter>"
-            "\nExample: python client.py  127.0.0.1     8080   list"
-        )
+class FTPClient:
 
-    if sys.argv[3].lower() not in ["list", "put", "get"]:
-        raise SystemExit(
-            "\nThe parameter \"%s\" is not supported. Try:"
-            "\npython client.py <hostname/ip> <port> <put filename | get filename | list>" % sys.argv[3]
-        )
+    EXAMPLE_INPUT = "\n - Example input: python client.py <domain/ip> <port> <put filename|get filename|list>"
 
-    if (not (1 <= len(sys.argv[2]) <= 5)) or (not sys.argv[2].isdigit()):
-        raise SystemExit(
-            "\nThe port parameter that has been provided is too short/long or is not a numerical value."
-        )
+    def __init__(self, host, port, command):
+        self.cli_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.host = host
+        self.port = self.check_port(port)
+        self.command = self.check_command(command)
+        self.filename = None
+        self.supported_commands = {
+            "put": self.put_file,
+            "get": self.get_file,
+            "list": self.show_list
+        }
 
-    if (sys.argv[3] == "put" or sys.argv[3] == "get") and len(sys.argv) != 5:
-        raise SystemExit(
-            "\nThe \"%s\" command must be followed by the <filename> field."
-            "\nExample: python client.py <hostname/ip> <port> %s /path/to/my/file.txt" % (sys.argv[3], sys.argv[3])
-        )
+    def err_exit(self, message):
+        """
+        :param message:
+        :return:
+        """
+        raise SystemExit("[ERR] %s" % message)
 
+    @staticmethod
+    def get_filesize(size_bytes):
+        """
+        :param size_bytes:
+        :return:
+        """
+        sizes = ['B', 'KB', 'MB', 'GB']
+        i = 0
+        while size_bytes > 1024 and i < 5:
+            size_bytes = size_bytes / 1024.00
+            i += 1
+        return "%0.2f%s" % (size_bytes, sizes[i])
 
-def put_file(clisock):
-    # connect to socket
-    filename = sys.argv[4]
-    print("[CMD] Invoking Server Protocol 'PUT' command with filename: %s" % filename)
+    def start(self):
+        try:
+            self.cli_socket.connect((self.host, self.port))
+            print("[CON] Successfully connected to server at: %s:%s" % (self.host, self.port))
+        except socket.gaierror:
+            self.cli_socket.close()
+            self.err_exit("Could not connect to host '%s' at port: %s" % (self.host, self.port))
+        else:
+            self.supported_commands[self.command[0]]()
+            self.cli_socket.sendall("DISCONNECT".encode())
+            self.cli_socket.close()
+            print("[DIS] Disconnected from server.")
 
-    data = open(filename, 'rb').read()
-    clisock.send(data)
+    def upload(self, file):
+        """
+        :param file:
+        :return:
+        """
+        file_size = str(os.path.getsize(os.getcwd() + '/' + file))
+        self.cli_socket.sendall(file_size.encode('utf'))
 
-    # await response
-    # data = cli_sock.recv(1024)
-    # print(data.decode('utf'))
+        with open('%s/%s' % (os.getcwd(), file), 'rb') as upload_file:
+            data = upload_file.read(4096)
+            bytes_sent = 0
+            max_size = self.get_filesize(os.path.getsize(file))
+            curr_size = self.get_filesize(bytes_sent)
+            while data:
+                self.cli_socket.sendall(data)
+                bytes_sent += len(data)
+                data = upload_file.read(4096)
+                curr_size = self.get_filesize(bytes_sent)
+                print("[UPL] Uploading '%s' [%s / %s]" % (file, curr_size, max_size), end='\r')
+            print("[UPL] Upload Complete '%s' [%s / %s]" % (file, curr_size, max_size))
 
+        print("[OK!] Server has received file '%s' from client" % file)
 
-def get_file(clisock):
-    # connect to socket, connect to server and download from server
-    filename = sys.argv[4]
+    def download(self, file, fsize):
 
-    print("[CMD] Invoking Server Protocol 'GET' command with filename: %s" % filename)
+        with open(file, 'wb') as download_file:
+            data = self.cli_socket.recv(4096)
+            bytes_collected = 0
+            max_size = self.get_filesize(fsize)
+            while data and (bytes_collected < fsize):
+                bytes_collected += len(data)
+                curr_size = self.get_filesize(bytes_collected)
+                download_file.write(data)
+                print("[DWN] Downloading '%s' [%s / %s]" % (file, curr_size, max_size), end='\r')
+                if len(data) < 4096:
+                    print("[DWN] Download Complete '%s' [%s / %s]" % (file, curr_size, max_size))
+                    break
+                data = self.cli_socket.recv(4096)
+        print("[OK!] File saved to: %s/%s" % (os.getcwd(), file))
 
-    clisock.sendall(str("get " + filename).encode('utf'))
+    # Checkers
+    def check_command(self, command):
+        cmd_type = command[0]
 
-    while True:
-        f = open(filename, 'wb')
-        data = clisock.recv(4096)
-        while data:
-            f.write(data)
-            if len(data) < 4096:
-                break
-            else:
-                data = clisock.recv(4096)
-        f.close()
-        break
-    print("end")
+        if cmd_type not in ["list", "put", "get"]:
+            self.err_exit("The parameter %s is not supported by this client. Try: %s" % (cmd_type, self.EXAMPLE_INPUT))
 
+        if (cmd_type == "put" or cmd_type == "get") and len(command) != 2:
+            self.err_exit("The \"%s\" command must be followed by the <filename> field. Try: %s" % (cmd_type, self.EXAMPLE_INPUT))
 
+        return command
 
-    
-    print('Successfully get the file')
+    def check_host(self, host):
 
-    print("Download Completed")
+        if host.lower() != "localhost" and (" " in host or not re.match(r"^[a-zA-Z0-9_.-]*$", host)):
+            self.err_exit("The domain/IP address provided contains spaces and/or special characters. "
+                          "Allowed characters: letters, numbers, periods, dashes and underscores.")
+        return host
 
+    def check_port(self, port):
 
-def show_list(clisock):
-    # connect to socket, print list of files
-    print("[CMD] Invoking Server Protocol 'LIST' command.")
-    clisock.sendall("list".encode('utf'))
-    data = cli_sock.recv(4096)
-    print(data.decode('utf') if data else '[ERR] No returned data in response.')
+        if not port.isdigit() or not (1 <= len(port) <= 5):
+            self.err_exit("The port parameter that has been provided is too short/long or is not a numerical value")
+        if int(port) < 0:
+            self.err_exit("The port parameter that has been provided is not a positive numerical value")
 
+        return int(port)
 
-commands = {
-    "put": put_file,
-    "get": get_file,
-    "list": show_list
-}
+    # Command execution
+    def put_file(self):
+
+        filename = self.command[1]
+        self.cli_socket.sendall(("PUT " + filename).encode())
+
+        print("[CMD] Invoking Server Protocol 'PUT' command with filename: %s" % filename)
+
+        if filename not in os.listdir(os.getcwd()):
+            self.cli_socket.sendall("FileNotFound".encode('utf'))
+            print("[ERR] File '%s' could not be found in client directory" % filename)
+        else:
+            print("[OK!] File '%s' found in client directory. Sending server the total file size of file." % filename)
+            self.upload(file=filename)
+
+    def get_file(self):
+
+        filename = self.command[1]
+        print("[CMD] Invoking Server Protocol 'GET' command with filename: %s" % filename)
+
+        self.cli_socket.sendall(("GET " + filename).encode())
+        response = self.cli_socket.recv(1024).decode()
+
+        if response == "FileNotFound":
+            self.err_exit("Server response: \"%s\": '%s' does not exist in server directory" % (response, filename))
+        else:
+            file_size = int(response)
+            self.download(file=filename, fsize=int(response))
+
+    def show_list(self):
+        # connect to socket, print list of files
+        print("[CMD] Invoking Server Protocol 'LIST' command.")
+        self.cli_socket.sendall("LIST".encode())
+        data = self.cli_socket.recv(4096)
+        if data:
+            print("[OK!] Server responded with:\n%s" % data.decode())
+        else:
+            self.err_exit("Server responded without a file list.")
+
 
 if __name__ == '__main__':
 
-    check_argv()
-    host = sys.argv[1]
-    port = int(sys.argv[2])
-    cmd = sys.argv[3].lower()
-    cli_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    if len(sys.argv) < 4:
+        raise SystemExit("\n[ERR] The domain/IP and port parameters are required:"
+                         "\nTry:     python client.py <domain/ip> <port> <parameter>"
+                         "\nExample: python client.py  127.0.0.1     8080   list")
 
-    try:
-        cli_sock.connect((host, port))
-    except socket.gaierror:
-        cli_sock.close()
-        raise SystemExit("[ERR] Could not connect to host '%s' at port: %s" % (host, port))
-
-    commands[cmd](cli_sock)
+    client = FTPClient(host=sys.argv[1], port=sys.argv[2], command=sys.argv[3:])
+    client.start()
 
 
 
