@@ -61,18 +61,11 @@ class FTPClient:
             self.err_exit("Could not connect to host '%s' at port: %s" % (self.host, self.port))
         else:
             self.supported_commands[self.command[0]]()
-            self.cli_socket.sendall("DISCONNECT".encode())
+            self.cli_socket.send("DISCONNECT".encode())
             self.cli_socket.close()
             print("[DIS] Disconnected from server.")
 
     def upload(self, file):
-        """
-        :param file:
-        :return:
-        """
-        file_size = str(os.path.getsize(os.getcwd() + '/' + file))
-        self.cli_socket.sendall(file_size.encode('utf'))
-
         with open('%s/%s' % (os.getcwd(), file), 'rb') as upload_file:
             data = upload_file.read(4096)
             bytes_sent = 0
@@ -137,16 +130,23 @@ class FTPClient:
     def put_file(self):
 
         filename = self.command[1]
-        self.cli_socket.sendall(("PUT " + filename).encode())
+        self.cli_socket.send(("PUT " + filename).encode())
 
         print("[CMD] Invoking Server Protocol 'PUT' command with filename: %s" % filename)
 
         if filename not in os.listdir(os.getcwd()):
-            self.cli_socket.sendall("FileNotFound".encode('utf'))
+            self.cli_socket.send("FileNotFound".encode())
             self.err_exit("File '%s' could not be found in client directory" % filename)
         else:
             print("[OK!] File '%s' found in client directory. Sending total filesize." % filename)
-            self.upload(file=filename)
+            file_size = str(os.path.getsize((os.getcwd()+'/'+filename)))
+
+            self.cli_socket.send(file_size.encode())
+
+            response = self.cli_socket.recv(8).decode()
+
+            if response == "RECEIVED":
+                self.upload(file=filename)
 
     def get_file(self):
 

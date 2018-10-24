@@ -9,11 +9,6 @@ import datetime
 #TODO: Send filelist in parts if over 4096bytes
 
 
-
-
-
-
-
 class FTPServer(threading.Thread):
 
     def __init__(self):
@@ -125,6 +120,8 @@ class FTPServer(threading.Thread):
             return
         
         file_size = int(response)
+        self.current_conn['socket'].sendall("RECEIVED".encode())
+        
         self.log("OK!", "Recieved file size for '%s' from server: %s." % (filename, file_size))
 
         with open(filename, 'wb') as download_file:
