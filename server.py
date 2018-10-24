@@ -9,30 +9,9 @@ import datetime
 #TODO: Send filelist in parts if over 4096bytes
 
 
-def clear_terminal():
-    os.system('clear' if os.name != 'nt' else 'cls')
 
-def check_args_port():
-    if len(sys.argv) < 2:
-        raise SystemExit("[ERR] Port number expected.")
 
-    port = sys.argv[1]
 
-    if (not (1 <= len(port) <= 5)) or (not port.isdigit()):
-        raise SystemExit("[ERR] Port must be a numerical value and between 0-99999.")
-    else:
-        return int(port)
-
-def get_ip_address():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        s.connect(("8.8.8.8", 80))
-        ip_address = s.getsockname()[0]
-    except socket.gaierror:
-        ip_address = "127.0.0.1"
-    finally:
-        s.close()
-    return ip_address
 
 
 class FTPServer(threading.Thread):
@@ -41,8 +20,8 @@ class FTPServer(threading.Thread):
         threading.Thread.__init__(self)
         logging.basicConfig(filename='server.log',level=logging.DEBUG)
         self.dir = os.getcwd()
-        self.port = check_args_port()
-        self.public_ip = get_ip_address()
+        self.port = self.check_args_port()
+        self.public_ip = self.get_ip_address()
         self.srv_socket = None
         self.server_is_running = False
         self.conns = []
@@ -53,6 +32,34 @@ class FTPServer(threading.Thread):
             "LIST": self.list_files,
             "DISCONNECT": self.disconnect
         }
+    
+    @staticmethod
+    def clear_terminal():
+        os.system('clear' if os.name != 'nt' else 'cls')
+    
+    @staticmethod
+    def check_args_port():
+        if len(sys.argv) < 2:
+            raise SystemExit("[ERR] Port number expected.")
+
+        port = sys.argv[1]
+
+        if (not (1 <= len(port) <= 5)) or (not port.isdigit()):
+            raise SystemExit("[ERR] Port must be a numerical value and between 0-99999.")
+        else:
+            return int(port)
+    
+    @staticmethod
+    def get_ip_address():
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            s.connect(("8.8.8.8", 80))
+            ip_address = s.getsockname()[0]
+        except socket.gaierror:
+            ip_address = "127.0.0.1"
+        finally:
+            s.close()
+        return ip_address
     
     def log(self, ctype, message):
         date = str(datetime.datetime.now()).split(".")[0]
@@ -110,12 +117,13 @@ class FTPServer(threading.Thread):
         filename = self.current_conn['command'][1]
 
         self.log("CMD", "Client [%s:%s] has executed command: PUT %s." % (ip, port, filename))
-        response = self.current_conn['socket'].recv(1024).decode()
+        response = self.current_conn['socket'].recv(1024)
+        response = response.decode()
 
         if response == "FileNotFound":
             self.log("ERR", "Client response: %s - '%s' does not exist in current client directory." % (response, filename))
             return
-
+        
         file_size = int(response)
         self.log("OK!", "Recieved file size for '%s' from server: %s." % (filename, file_size))
 
@@ -130,7 +138,7 @@ class FTPServer(threading.Thread):
                     break
                 data = self.current_conn['socket'].recv(4096)
 
-        self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
+            self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
 
     def disconnect(self, conn):
         try:
@@ -179,7 +187,7 @@ class FTPServer(threading.Thread):
 
     def start(self):
 
-        clear_terminal()
+        self.clear_terminal()
 
         print(
             "\nLaunching server at:"

@@ -37,10 +37,6 @@ class FTPClient:
         }
 
     def err_exit(self, message):
-        """
-        :param message:
-        :return:
-        """
         raise SystemExit("[ERR] %s" % message)
 
     @staticmethod
@@ -147,7 +143,7 @@ class FTPClient:
 
         if filename not in os.listdir(os.getcwd()):
             self.cli_socket.sendall("FileNotFound".encode('utf'))
-            print("[ERR] File '%s' could not be found in client directory" % filename)
+            self.err_exit("File '%s' could not be found in client directory" % filename)
         else:
             print("[OK!] File '%s' found in client directory. Sending total filesize." % filename)
             self.upload(file=filename)

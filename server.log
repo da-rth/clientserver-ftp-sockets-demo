@@ -85,3 +85,256 @@ INFO:root:2018-10-23 14:24:23 [CMD] Client [127.0.0.1:49458] has executed comman
 INFO:root:2018-10-23 14:24:23 [OK!] Recieved file size for 'hoot.mp4' from server: 34390033.
 INFO:root:2018-10-23 14:24:29 [OK!] Client upload has been downloaded to the current working directory: H:\2086380A\Workspace\NOSE2_AE1/hoot.mp4
 INFO:root:2018-10-23 14:25:30 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-23 14:33:04 [SRV] Server initialised.
+INFO:root:2018-10-23 14:33:04 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-23 14:33:11 [CON] Client [127.0.0.1:49487] has connected.
+INFO:root:2018-10-23 14:33:11 [CMD] Client [127.0.0.1:49487] has executed command: LIST.
+INFO:root:2018-10-23 14:33:11 [OK!] Client [127.0.0.1:49487] has received full file list.
+INFO:root:2018-10-23 14:33:11 [DIS] Client [127.0.0.1:49487] has disconnected.
+INFO:root:2018-10-23 14:33:13 [CON] Client [127.0.0.1:49488] has connected.
+INFO:root:2018-10-23 14:33:13 [CMD] Client [127.0.0.1:49488] has executed command: LIST.
+INFO:root:2018-10-23 14:33:13 [OK!] Client [127.0.0.1:49488] has received full file list.
+INFO:root:2018-10-23 14:33:13 [DIS] Client [127.0.0.1:49488] has disconnected.
+INFO:root:2018-10-23 14:33:14 [CON] Client [127.0.0.1:49489] has connected.
+INFO:root:2018-10-23 14:33:14 [CMD] Client [127.0.0.1:49489] has executed command: LIST.
+INFO:root:2018-10-23 14:33:14 [OK!] Client [127.0.0.1:49489] has received full file list.
+INFO:root:2018-10-23 14:33:14 [DIS] Client [127.0.0.1:49489] has disconnected.
+INFO:root:2018-10-23 14:33:15 [CON] Client [127.0.0.1:49490] has connected.
+INFO:root:2018-10-23 14:33:15 [CMD] Client [127.0.0.1:49490] has executed command: LIST.
+INFO:root:2018-10-23 14:33:15 [OK!] Client [127.0.0.1:49490] has received full file list.
+INFO:root:2018-10-23 14:33:15 [DIS] Client [127.0.0.1:49490] has disconnected.
+INFO:root:2018-10-23 14:33:17 [CON] Client [127.0.0.1:49491] has connected.
+INFO:root:2018-10-23 14:33:17 [CMD] Client [127.0.0.1:49491] has executed command: PUT hoot.mp4.
+INFO:root:2018-10-23 14:33:17 [OK!] Recieved file size for 'hoot.mp4' from server: 34390033.
+INFO:root:2018-10-23 14:33:20 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/hoot.mp4
+INFO:root:2018-10-23 14:33:29 [CON] Client [127.0.0.1:49492] has connected.
+INFO:root:2018-10-23 14:33:29 [CMD] Client [127.0.0.1:49492] has executed command: GET hoot.mp4
+INFO:root:2018-10-23 14:33:29 [OK!] File 'hoot.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-23 14:33:34 [OK!] Client [127.0.0.1:49492] has downloaded file 'hoot.mp4' from server.
+INFO:root:2018-10-23 14:33:35 [DIS] Client [127.0.0.1:49492] has disconnected.
+INFO:root:2018-10-24 15:36:18 [SRV] Server initialised.
+INFO:root:2018-10-24 15:36:18 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:37:11 [CON] Client [127.0.0.1:58504] has connected.
+INFO:root:2018-10-24 15:37:11 [CMD] Client [127.0.0.1:58504] has executed command: LIST.
+INFO:root:2018-10-24 15:37:11 [OK!] Client [127.0.0.1:58504] has received full file list.
+INFO:root:2018-10-24 15:37:11 [DIS] Client [127.0.0.1:58504] has disconnected.
+INFO:root:2018-10-24 15:38:37 [CON] Client [127.0.0.1:54230] has connected.
+INFO:root:2018-10-24 15:38:37 [CMD] Client [127.0.0.1:54230] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:38:37 [OK!] File 'thelook.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 15:38:40 [OK!] Client [127.0.0.1:54230] has downloaded file 'thelook.mp4' from server.
+INFO:root:2018-10-24 15:38:40 [DIS] Client [127.0.0.1:54230] has disconnected.
+INFO:root:2018-10-24 15:38:49 [CON] Client [127.0.0.1:54231] has connected.
+INFO:root:2018-10-24 15:38:49 [CMD] Client [127.0.0.1:54231] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:38:49 [OK!] File 'thelook.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 15:38:52 [OK!] Client [127.0.0.1:54231] has downloaded file 'thelook.mp4' from server.
+INFO:root:2018-10-24 15:38:52 [DIS] Client [127.0.0.1:54231] has disconnected.
+INFO:root:2018-10-24 15:40:52 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-24 15:40:58 [SRV] Server initialised.
+INFO:root:2018-10-24 15:40:58 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:46:29 [CON] Client [127.0.0.1:49303] has connected.
+INFO:root:2018-10-24 15:46:29 [CMD] Client [127.0.0.1:49303] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:46:29 [OK!] File 'thelook.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 15:46:33 [OK!] Client [127.0.0.1:49303] has downloaded file 'thelook.mp4' from server.
+INFO:root:2018-10-24 15:46:33 [DIS] Client [127.0.0.1:49303] has disconnected.
+INFO:root:2018-10-24 15:47:06 [CON] Client [127.0.0.1:49306] has connected.
+INFO:root:2018-10-24 15:47:06 [CMD] Client [127.0.0.1:49306] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:47:06 [OK!] File 'thelook.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 15:47:10 [OK!] Client [127.0.0.1:49306] has downloaded file 'thelook.mp4' from server.
+INFO:root:2018-10-24 15:47:10 [DIS] Client [127.0.0.1:49306] has disconnected.
+INFO:root:2018-10-24 15:54:52 [CON] Client [130.209.254.102:57162] has connected.
+INFO:root:2018-10-24 15:54:52 [CMD] Client [130.209.254.102:57162] has executed command: LIST.
+INFO:root:2018-10-24 15:54:52 [OK!] Client [130.209.254.102:57162] has received full file list.
+INFO:root:2018-10-24 15:54:52 [DIS] Client [130.209.254.102:57162] has disconnected.
+INFO:root:2018-10-24 15:55:16 [CON] Client [130.209.254.102:57163] has connected.
+INFO:root:2018-10-24 15:55:16 [CMD] Client [130.209.254.102:57163] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:55:16 [OK!] File 'thelook.mp4' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 15:55:18 [OK!] Client [130.209.254.102:57163] has downloaded file 'thelook.mp4' from server.
+INFO:root:2018-10-24 15:55:19 [DIS] Client [130.209.254.102:57163] has disconnected.
+INFO:root:2018-10-24 15:56:10 [CON] Client [130.209.254.102:57187] has connected.
+INFO:root:2018-10-24 15:56:10 [CMD] Client [130.209.254.102:57187] has executed command: LIST.
+INFO:root:2018-10-24 15:56:10 [OK!] Client [130.209.254.102:57187] has received full file list.
+INFO:root:2018-10-24 15:56:10 [DIS] Client [130.209.254.102:57187] has disconnected.
+INFO:root:2018-10-24 15:56:18 [CON] Client [130.209.254.102:57188] has connected.
+INFO:root:2018-10-24 15:56:18 [CMD] Client [130.209.254.102:57188] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 15:57:03 [SRV] Server initialised.
+INFO:root:2018-10-24 15:57:03 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:57:06 [CON] Client [130.209.254.102:57191] has connected.
+INFO:root:2018-10-24 15:57:06 [CMD] Client [130.209.254.102:57191] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 15:57:28 [SRV] Server initialised.
+INFO:root:2018-10-24 15:57:28 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:57:34 [CON] Client [130.209.254.102:57193] has connected.
+INFO:root:2018-10-24 15:57:34 [CMD] Client [130.209.254.102:57193] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 15:58:54 [SRV] Server initialised.
+INFO:root:2018-10-24 15:58:54 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:58:56 [CON] Client [130.209.254.102:57195] has connected.
+INFO:root:2018-10-24 15:58:56 [CMD] Client [130.209.254.102:57195] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 15:59:17 [SRV] Server initialised.
+INFO:root:2018-10-24 15:59:17 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 15:59:20 [CON] Client [127.0.0.1:49626] has connected.
+INFO:root:2018-10-24 15:59:20 [CMD] Client [127.0.0.1:49626] has executed command: GET thelook.mp4
+INFO:root:2018-10-24 15:59:20 [ERR] File 'thelook.mp4' could not be found in server directory. Notifying client.
+INFO:root:2018-10-24 15:59:31 [CON] Client [127.0.0.1:49630] has connected.
+INFO:root:2018-10-24 15:59:31 [CMD] Client [127.0.0.1:49630] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:02:37 [SRV] Server initialised.
+INFO:root:2018-10-24 16:02:37 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:02:49 [CON] Client [127.0.0.1:49653] has connected.
+INFO:root:2018-10-24 16:02:49 [CMD] Client [127.0.0.1:49653] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:03:15 [SRV] Server initialised.
+INFO:root:2018-10-24 16:03:15 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:03:16 [CON] Client [127.0.0.1:49657] has connected.
+INFO:root:2018-10-24 16:03:16 [CMD] Client [127.0.0.1:49657] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:04:01 [SRV] Server initialised.
+INFO:root:2018-10-24 16:04:01 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:04:03 [CON] Client [127.0.0.1:49692] has connected.
+INFO:root:2018-10-24 16:04:03 [CMD] Client [127.0.0.1:49692] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:05:56 [SRV] Server initialised.
+INFO:root:2018-10-24 16:05:56 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:05:58 [CON] Client [127.0.0.1:49704] has connected.
+INFO:root:2018-10-24 16:05:58 [CMD] Client [127.0.0.1:49704] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:05:58 [ERR] Client response: FileNotFound - 'thelook.mp4' does not exist in current client directory.
+INFO:root:2018-10-24 16:06:13 [CON] Client [130.209.254.102:55635] has connected.
+INFO:root:2018-10-24 16:06:13 [CMD] Client [130.209.254.102:55635] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:06:39 [SRV] Server initialised.
+INFO:root:2018-10-24 16:06:39 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:06:48 [CON] Client [127.0.0.1:49709] has connected.
+INFO:root:2018-10-24 16:06:48 [CMD] Client [127.0.0.1:49709] has executed command: GET test.txt
+INFO:root:2018-10-24 16:06:48 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 16:06:48 [OK!] Client [127.0.0.1:49709] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-24 16:06:48 [DIS] Client [127.0.0.1:49709] has disconnected.
+INFO:root:2018-10-24 16:06:56 [CON] Client [127.0.0.1:49711] has connected.
+INFO:root:2018-10-24 16:06:56 [CMD] Client [127.0.0.1:49711] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:07:15 [SRV] Server initialised.
+INFO:root:2018-10-24 16:07:15 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:07:18 [CON] Client [127.0.0.1:49713] has connected.
+INFO:root:2018-10-24 16:07:18 [CMD] Client [127.0.0.1:49713] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:09:08 [SRV] Server initialised.
+INFO:root:2018-10-24 16:09:08 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:09:09 [CON] Client [127.0.0.1:49725] has connected.
+INFO:root:2018-10-24 16:09:09 [CMD] Client [127.0.0.1:49725] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:09:57 [SRV] Server initialised.
+INFO:root:2018-10-24 16:09:57 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:09:59 [CON] Client [127.0.0.1:49728] has connected.
+INFO:root:2018-10-24 16:09:59 [CMD] Client [127.0.0.1:49728] has executed command: PUT test.txtdawda.
+INFO:root:2018-10-24 16:09:59 [ERR] Client response: FileNotFound - 'test.txtdawda' does not exist in current client directory.
+INFO:root:2018-10-24 16:10:25 [CON] Client [127.0.0.1:49732] has connected.
+INFO:root:2018-10-24 16:10:25 [CMD] Client [127.0.0.1:49732] has executed command: PUT test.txtdawda.
+INFO:root:2018-10-24 16:10:25 [ERR] Client response: FileNotFound - 'test.txtdawda' does not exist in current client directory.
+INFO:root:2018-10-24 16:10:30 [CON] Client [127.0.0.1:49734] has connected.
+INFO:root:2018-10-24 16:10:30 [CMD] Client [127.0.0.1:49734] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:11:01 [SRV] Server initialised.
+INFO:root:2018-10-24 16:11:01 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:11:01 [CON] Client [127.0.0.1:49738] has connected.
+INFO:root:2018-10-24 16:11:01 [CMD] Client [127.0.0.1:49738] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:11:04 [SRV] Server initialised.
+INFO:root:2018-10-24 16:11:04 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:11:06 [CON] Client [127.0.0.1:49739] has connected.
+INFO:root:2018-10-24 16:11:06 [CMD] Client [127.0.0.1:49739] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:11:51 [SRV] Server initialised.
+INFO:root:2018-10-24 16:11:51 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:11:51 [CON] Client [127.0.0.1:49748] has connected.
+INFO:root:2018-10-24 16:11:51 [CMD] Client [127.0.0.1:49748] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:12:21 [SRV] Server initialised.
+INFO:root:2018-10-24 16:12:21 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:12:22 [CON] Client [127.0.0.1:49753] has connected.
+INFO:root:2018-10-24 16:12:22 [CMD] Client [127.0.0.1:49753] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:12:22 [OK!] Recieved file size for 'test.txt' from server: 445445.
+INFO:root:2018-10-24 16:12:22 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:12:22 [DIS] Client [127.0.0.1:49753] has disconnected.
+INFO:root:2018-10-24 16:12:36 [CON] Client [127.0.0.1:49756] has connected.
+INFO:root:2018-10-24 16:12:36 [CMD] Client [127.0.0.1:49756] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:12:36 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-24 16:12:36 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:14:10 [SRV] Server initialised.
+INFO:root:2018-10-24 16:14:10 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:14:12 [CON] Client [130.209.254.102:55654] has connected.
+INFO:root:2018-10-24 16:14:12 [CMD] Client [130.209.254.102:55654] has executed command: PUT thelook.mp4.
+INFO:root:2018-10-24 16:14:28 [SRV] Server initialised.
+INFO:root:2018-10-24 16:14:28 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:14:45 [CON] Client [127.0.0.1:49762] has connected.
+INFO:root:2018-10-24 16:14:45 [CMD] Client [127.0.0.1:49762] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:14:45 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-24 16:14:45 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:14:45 [DIS] Client [127.0.0.1:49762] has disconnected.
+INFO:root:2018-10-24 16:14:59 [CON] Client [130.209.254.102:55657] has connected.
+INFO:root:2018-10-24 16:14:59 [CMD] Client [130.209.254.102:55657] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:14:59 [ERR] Client response: FileNotFound - 'test.txt' does not exist in current client directory.
+INFO:root:2018-10-24 16:15:08 [CON] Client [130.209.254.102:55658] has connected.
+INFO:root:2018-10-24 16:15:08 [CMD] Client [130.209.254.102:55658] has executed command: GET test.txt
+INFO:root:2018-10-24 16:15:08 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 16:15:08 [OK!] Client [130.209.254.102:55658] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-24 16:15:08 [DIS] Client [130.209.254.102:55658] has disconnected.
+INFO:root:2018-10-24 16:15:15 [CON] Client [130.209.254.102:55659] has connected.
+INFO:root:2018-10-24 16:15:15 [CMD] Client [130.209.254.102:55659] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:16:58 [SRV] Server initialised.
+INFO:root:2018-10-24 16:16:58 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:16:59 [CON] Client [130.209.254.102:55804] has connected.
+INFO:root:2018-10-24 16:16:59 [CMD] Client [130.209.254.102:55804] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:17:10 [SRV] Server initialised.
+INFO:root:2018-10-24 16:17:10 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:17:12 [CON] Client [127.0.0.1:49776] has connected.
+INFO:root:2018-10-24 16:17:12 [CMD] Client [127.0.0.1:49776] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:17:12 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-24 16:17:12 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:17:30 [CON] Client [127.0.0.1:49777] has connected.
+INFO:root:2018-10-24 16:17:30 [CMD] Client [127.0.0.1:49777] has executed command: GET test.txt
+INFO:root:2018-10-24 16:17:30 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 16:17:30 [OK!] Client [127.0.0.1:49777] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-24 16:17:30 [DIS] Client [127.0.0.1:49777] has disconnected.
+INFO:root:2018-10-24 16:17:36 [CON] Client [127.0.0.1:49778] has connected.
+INFO:root:2018-10-24 16:17:36 [CMD] Client [127.0.0.1:49778] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:17:36 [OK!] Recieved file size for 'test.txt' from server: 458458.
+INFO:root:2018-10-24 16:17:36 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:18:11 [CON] Client [130.209.254.102:55923] has connected.
+INFO:root:2018-10-24 16:18:11 [CMD] Client [130.209.254.102:55923] has executed command: PUT client2.py.
+INFO:root:2018-10-24 16:18:39 [SRV] Server initialised.
+INFO:root:2018-10-24 16:18:39 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:18:45 [CON] Client [130.209.254.102:55926] has connected.
+INFO:root:2018-10-24 16:18:45 [CMD] Client [130.209.254.102:55926] has executed command: PUT client2.py.
+INFO:root:2018-10-24 16:21:24 [SRV] Server initialised.
+INFO:root:2018-10-24 16:21:24 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:21:26 [CON] Client [127.0.0.1:49795] has connected.
+INFO:root:2018-10-24 16:21:26 [CMD] Client [127.0.0.1:49795] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:21:26 [OK!] Recieved file size for 'test.txt' from server: 458.
+INFO:root:2018-10-24 16:21:26 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:22:32 [SRV] Server initialised.
+INFO:root:2018-10-24 16:22:32 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:22:36 [CON] Client [127.0.0.1:49799] has connected.
+INFO:root:2018-10-24 16:22:36 [CMD] Client [127.0.0.1:49799] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:22:36 [OK!] Recieved file size for 'test.txt' from server: 458.
+INFO:root:2018-10-24 16:22:36 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:22:36 [DIS] Client [127.0.0.1:49799] has disconnected.
+INFO:root:2018-10-24 16:22:47 [CON] Client [130.209.254.102:56083] has connected.
+INFO:root:2018-10-24 16:22:47 [CMD] Client [130.209.254.102:56083] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:25:24 [SRV] Server initialised.
+INFO:root:2018-10-24 16:25:24 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:25:27 [CON] Client [127.0.0.1:49819] has connected.
+INFO:root:2018-10-24 16:25:27 [CMD] Client [127.0.0.1:49819] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:25:27 [OK!] Recieved file size for 'test.txt' from server: 458.
+INFO:root:2018-10-24 16:25:27 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:25:27 [DIS] Client [127.0.0.1:49819] has disconnected.
+INFO:root:2018-10-24 16:25:37 [CON] Client [127.0.0.1:49822] has connected.
+INFO:root:2018-10-24 16:25:37 [CMD] Client [127.0.0.1:49822] has executed command: GET test.txt
+INFO:root:2018-10-24 16:25:37 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-24 16:25:37 [OK!] Client [127.0.0.1:49822] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-24 16:25:37 [DIS] Client [127.0.0.1:49822] has disconnected.
+INFO:root:2018-10-24 16:25:40 [CON] Client [127.0.0.1:49823] has connected.
+INFO:root:2018-10-24 16:25:40 [CMD] Client [127.0.0.1:49823] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:25:40 [OK!] Recieved file size for 'test.txt' from server: 458.
+INFO:root:2018-10-24 16:25:40 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:25:47 [CON] Client [130.209.254.102:56089] has connected.
+INFO:root:2018-10-24 16:25:47 [CMD] Client [130.209.254.102:56089] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:26:41 [SRV] Server initialised.
+INFO:root:2018-10-24 16:26:41 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:26:42 [CON] Client [130.209.254.102:56178] has connected.
+INFO:root:2018-10-24 16:26:42 [CMD] Client [130.209.254.102:56178] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:27:54 [SRV] Server initialised.
+INFO:root:2018-10-24 16:27:54 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:27:56 [CON] Client [130.209.254.102:56191] has connected.
+INFO:root:2018-10-24 16:27:56 [CMD] Client [130.209.254.102:56191] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:28:04 [SRV] Server initialised.
+INFO:root:2018-10-24 16:28:04 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-24 16:28:06 [CON] Client [127.0.0.1:49833] has connected.
+INFO:root:2018-10-24 16:28:06 [CMD] Client [127.0.0.1:49833] has executed command: PUT test.txt.
+INFO:root:2018-10-24 16:28:06 [OK!] Recieved file size for 'test.txt' from server: 458.
+INFO:root:2018-10-24 16:28:06 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-24 16:28:06 [DIS] Client [127.0.0.1:49833] has disconnected.
