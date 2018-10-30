@@ -7,7 +7,9 @@ import logging
 import datetime
 
 #TODO: Send filelist in parts if over 4096bytes
-
+#TODO: Check if filesize of file being sent/received is larger than 5gb
+#TODO: Check if filename of file is too long (longer than 256chars?)
+#TODO: Add subdirectory support?
 
 class FTPServer(threading.Thread):
 
@@ -60,10 +62,10 @@ class FTPServer(threading.Thread):
         date = str(datetime.datetime.now()).split(".")[0]
         line = "[%s] %s" % (ctype, message)
 
-        if type == "ERR":
+        if ctype == "ERR":
             logging.warning("%s %s" % (date, line))
 
-        elif type == "SRV":
+        elif ctype == "SRV":
             logging.info("\n%s %s" % (date, line))
             print(line)
         else:
@@ -88,7 +90,7 @@ class FTPServer(threading.Thread):
         self.log("CMD", "Client [%s:%s] has executed command: GET %s" % (ip, port, filename))
 
         if filename not in os.listdir(self.dir):
-            self.current_conn['socket'].sendall("FileNotFound".encode('utf'))
+            self.current_conn['socket'].sendall(b"FileNotFound")
             self.log("ERR", "File '%s' could not be found in server directory. Notifying client." % filename)
         
         else:
@@ -112,28 +114,25 @@ class FTPServer(threading.Thread):
         filename = self.current_conn['command'][1]
 
         self.log("CMD", "Client [%s:%s] has executed command: PUT %s." % (ip, port, filename))
-        response = self.current_conn['socket'].recv(1024)
-        response = response.decode()
+        response = self.current_conn['socket'].recv(1024).decode()
 
         if response == "FileNotFound":
             self.log("ERR", "Client response: %s - '%s' does not exist in current client directory." % (response, filename))
             return
         
         file_size = int(response)
-        self.current_conn['socket'].sendall("RECEIVED".encode())
-        
+
+        self.current_conn['socket'].sendall(b"RECEIVED")
         self.log("OK!", "Recieved file size for '%s' from server: %s." % (filename, file_size))
 
         with open(filename, 'wb') as download_file:
-            data = self.current_conn['socket'].recv(4096)
+           
             bytes_collected = 0
 
-            while data and (bytes_collected < file_size):
+            while bytes_collected < file_size:
+                data = self.current_conn['socket'].recv(4096)
                 bytes_collected += len(data)
                 download_file.write(data)
-                if len(data) < 4096:
-                    break
-                data = self.current_conn['socket'].recv(4096)
 
             self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
 
@@ -178,9 +177,8 @@ class FTPServer(threading.Thread):
                             self.commands[command_type]()
 
                     except socket.error as e:
-                        print(e)
+                        self.log("ERR", str(e))
                         self.disconnect(connection)
-
 
     def start(self):
 

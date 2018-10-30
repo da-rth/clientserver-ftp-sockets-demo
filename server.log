@@ -375,3 +375,50 @@ INFO:root:2018-10-24 17:19:24 [CON] Client [127.0.0.1:62771] has connected.
 INFO:root:2018-10-24 17:19:24 [CMD] Client [127.0.0.1:62771] has executed command: PUT test.txt.
 INFO:root:2018-10-24 17:19:24 [OK!] Recieved file size for 'test.txt' from server: 445.
 INFO:root:2018-10-24 17:19:24 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:
+2018-10-30 13:01:27 [SRV] Server initialised.
+INFO:root:2018-10-30 13:01:27 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-30 13:03:38 [CON] Client [127.0.0.1:50253] has connected.
+INFO:root:2018-10-30 13:03:38 [CMD] Client [127.0.0.1:50253] has executed command: PUT test.txt.
+INFO:root:2018-10-30 13:03:38 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-30 13:03:38 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-30 13:03:38 [DIS] Client [127.0.0.1:50253] has disconnected.
+INFO:root:2018-10-30 13:03:51 [CON] Client [127.0.0.1:50255] has connected.
+INFO:root:2018-10-30 13:03:51 [CMD] Client [127.0.0.1:50255] has executed command: GET test.txt
+INFO:root:2018-10-30 13:03:51 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-30 13:03:51 [OK!] Client [127.0.0.1:50255] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-30 13:03:51 [DIS] Client [127.0.0.1:50255] has disconnected.
+INFO:root:2018-10-30 13:21:21 [EXI] Server closed. Goodbye!
+INFO:root:
+2018-10-30 13:39:12 [SRV] Server initialised.
+INFO:root:2018-10-30 13:39:12 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-30 13:39:15 [CON] Client [127.0.0.1:50390] has connected.
+INFO:root:2018-10-30 13:39:15 [CMD] Client [127.0.0.1:50390] has executed command: GET test.txt
+INFO:root:2018-10-30 13:39:15 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-30 13:39:15 [OK!] Client [127.0.0.1:50390] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-30 13:39:15 [DIS] Client [127.0.0.1:50390] has disconnected.
+INFO:root:2018-10-30 13:39:18 [CON] Client [127.0.0.1:50392] has connected.
+INFO:root:2018-10-30 13:39:18 [CMD] Client [127.0.0.1:50392] has executed command: PUT test.txt.
+INFO:root:2018-10-30 13:39:18 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-30 13:45:14 [EXI] Server closed. Goodbye!
+INFO:root:
+2018-10-30 13:45:18 [SRV] Server initialised.
+INFO:root:2018-10-30 13:45:18 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-30 13:45:19 [CON] Client [127.0.0.1:50402] has connected.
+INFO:root:2018-10-30 13:45:19 [CMD] Client [127.0.0.1:50402] has executed command: PUT test.txt.
+INFO:root:2018-10-30 13:45:19 [OK!] Recieved file size for 'test.txt' from server: 445.
+INFO:root:2018-10-30 13:45:19 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt
+INFO:root:2018-10-30 13:45:26 [CON] Client [127.0.0.1:50403] has connected.
+INFO:root:2018-10-30 13:45:26 [CMD] Client [127.0.0.1:50403] has executed command: GET test.txt
+INFO:root:2018-10-30 13:45:26 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-30 13:45:26 [OK!] Client [127.0.0.1:50403] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-30 13:45:26 [DIS] Client [127.0.0.1:50403] has disconnected.
+INFO:root:2018-10-30 13:47:42 [CON] Client [127.0.0.1:50408] has connected.
+INFO:root:2018-10-30 13:47:42 [CMD] Client [127.0.0.1:50408] has executed command: GET test.txt
+INFO:root:2018-10-30 13:47:42 [OK!] File 'test.txt' found in server directory. Sending client total file-size.
+INFO:root:2018-10-30 13:47:42 [OK!] Client [127.0.0.1:50408] has downloaded file 'test.txt' from server.
+INFO:root:2018-10-30 13:47:42 [DIS] Client [127.0.0.1:50408] has disconnected.
+INFO:root:2018-10-30 13:47:45 [CON] Client [127.0.0.1:50409] has connected.
+INFO:root:2018-10-30 13:47:45 [CMD] Client [127.0.0.1:50409] has executed command: PUT test.txt.
+INFO:root:2018-10-30 13:47:45 [OK!] Recieved file size for 'test.txt' from server: 455.
+INFO:root:2018-10-30 13:47:45 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/test.txt

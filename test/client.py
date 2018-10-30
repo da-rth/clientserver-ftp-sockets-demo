@@ -65,39 +65,6 @@ class FTPClient:
             self.cli_socket.close()
             print("[DIS] Disconnected from server.")
 
-    def upload(self, file):
-        with open('%s/%s' % (os.getcwd(), file), 'rb') as upload_file:
-            data = upload_file.read(4096)
-            bytes_sent = 0
-            max_size = self.get_filesize(os.path.getsize(file))
-            curr_size = self.get_filesize(bytes_sent)
-            while data:
-                self.cli_socket.sendall(data)
-                bytes_sent += len(data)
-                data = upload_file.read(4096)
-                curr_size = self.get_filesize(bytes_sent)
-                print("[UPL] Uploading '%s' [%s / %s]" % (file, curr_size, max_size), end='\r')
-            print("[UPL] Upload Complete '%s' [%s / %s]" % (file, curr_size, max_size))
-
-        print("[OK!] Server has received file '%s' from client" % file)
-
-    def download(self, file, fsize):
-
-        with open(file, 'wb') as download_file:
-            data = self.cli_socket.recv(4096)
-            bytes_collected = 0
-            max_size = self.get_filesize(fsize)
-            while data and (bytes_collected < fsize):
-                bytes_collected += len(data)
-                curr_size = self.get_filesize(bytes_collected)
-                download_file.write(data)
-                print("[DWN] Downloading '%s' [%s / %s]" % (file, curr_size, max_size), end='\r')
-                if len(data) < 4096:
-                    print("[DWN] Download Complete '%s' [%s / %s]" % (file, curr_size, max_size))
-                    break
-                data = self.cli_socket.recv(4096)
-        print("[OK!] File saved to: %s/%s" % (os.getcwd(), file))
-
     # Checkers
     def check_command(self, command):
         cmd_type = command[0]
@@ -139,14 +106,30 @@ class FTPClient:
             self.err_exit("File '%s' could not be found in client directory" % filename)
         else:
             print("[OK!] File '%s' found in client directory. Sending total filesize." % filename)
+            
             file_size = str(os.path.getsize((os.getcwd()+'/'+filename)))
-
             self.cli_socket.send(file_size.encode())
-
             response = self.cli_socket.recv(8).decode()
 
             if response == "RECEIVED":
-                self.upload(file=filename)
+
+                max_size = self.get_filesize(os.path.getsize(filename))
+
+                with open('%s/%s' % (os.getcwd(), filename), 'rb') as upload_file:
+                    
+                    data = upload_file.read(4096)
+                    bytes_sent = 0
+
+                    while data:
+                        self.cli_socket.sendall(data)
+                        bytes_sent += len(data)
+                        data = upload_file.read(4096)
+                        curr_size = self.get_filesize(bytes_sent)
+                        print("[UPL] Uploading '%s' [%s / %s]" % (filename, curr_size, max_size), end='\r')
+                    
+                    print("[UPL] Upload Complete '%s' [%s / %s]" % (filename, curr_size, max_size))
+
+                print("[OK!] Server has received file '%s' from client" % filename)
 
     def get_file(self):
 
@@ -160,7 +143,20 @@ class FTPClient:
             self.err_exit("Server response: \"%s\": '%s' does not exist in server directory" % (response, filename))
         else:
             file_size = int(response)
-            self.download(file=filename, fsize=int(response))
+            with open(filename, 'wb') as download_file:
+                data = self.cli_socket.recv(4096)
+                bytes_collected = 0
+                max_size = self.get_filesize(file_size)
+                while data and (bytes_collected < file_size):
+                    bytes_collected += len(data)
+                    curr_size = self.get_filesize(bytes_collected)
+                    download_file.write(data)
+                    print("[DWN] Downloading '%s' [%s / %s]" % (filename, curr_size, max_size), end='\r')
+                    if len(data) < 4096:
+                        print("[DWN] Download Complete '%s' [%s / %s]" % (filename, curr_size, max_size))
+                        break
+                    data = self.cli_socket.recv(4096)
+            print("[OK!] File saved to: %s/%s" % (os.getcwd(), filename))
 
     def show_list(self):
         # connect to socket, print list of files
