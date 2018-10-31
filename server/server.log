@@ -728,3 +728,9 @@ WARNING:root:2018-10-31 17:20:34 [ERR] FileAlreadyExists: File already exists in
 INFO:root:2018-10-31 17:20:48 [CON] Client [127.0.0.1 @ 60785] has connected.
 INFO:root:2018-10-31 17:20:48 [CMD] Client [127.0.0.1 @ 60785] has executed command: GET server.log
 INFO:root:2018-10-31 17:20:48 [OK!] File 'server.log' found in server directory. Sending client total file-size.
+INFO:root:2018-10-31 17:20:48 [OK!] Client [127.0.0.1 @ 60785] has downloaded file 'server.log' from server.
+INFO:root:2018-10-31 17:20:48 [DIS] Client [127.0.0.1 @ 60785] has disconnected.
+INFO:root:2018-10-31 17:20:55 [CON] Client [127.0.0.1 @ 60786] has connected.
+INFO:root:2018-10-31 17:20:55 [CMD] Client [127.0.0.1 @ 60786] has executed command: GET serverdwdada
+WARNING:root:2018-10-31 17:20:55 [ERR] FileNotFound: File could not be found in client directory
+INFO:root:2018-10-31 17:22:36 [EXI] Server closed. Goodbye!
