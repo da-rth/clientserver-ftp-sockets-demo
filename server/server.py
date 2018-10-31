@@ -6,11 +6,6 @@ import threading
 import logging
 import datetime
 
-#TODO: Send filelist in parts if over 4096bytes
-#TODO: Check if filesize of file being sent/received is larger than 5gb
-#TODO: Check if filename of file is too long (longer than 256chars?)
-#TODO: Add subdirectory support?
-
 class FTPServer(threading.Thread):
 
     def __init__(self):

@@ -734,3 +734,14 @@ INFO:root:2018-10-31 17:20:55 [CON] Client [127.0.0.1 @ 60786] has connected.
 INFO:root:2018-10-31 17:20:55 [CMD] Client [127.0.0.1 @ 60786] has executed command: GET serverdwdada
 WARNING:root:2018-10-31 17:20:55 [ERR] FileNotFound: File could not be found in client directory
 INFO:root:2018-10-31 17:22:36 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:24:58 [SRV] Server initialised.
+INFO:root:2018-10-31 17:24:58 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:25:18 [CON] Client [127.0.0.1 @ 60820] has connected.
+INFO:root:2018-10-31 17:25:18 [CMD] Client [127.0.0.1 @ 60820] has executed command: GET server.log
+INFO:root:2018-10-31 17:25:18 [OK!] File 'server.log' found in server directory. Sending client total file-size.
+INFO:root:2018-10-31 17:25:18 [OK!] Client [127.0.0.1 @ 60820] has downloaded file 'server.log' from server.
+INFO:root:2018-10-31 17:25:18 [DIS] Client [127.0.0.1 @ 60820] has disconnected.
+INFO:root:2018-10-31 17:25:37 [CON] Client [127.0.0.1 @ 60822] has connected.
+INFO:root:2018-10-31 17:25:37 [CMD] Client [127.0.0.1 @ 60822] has executed command: LIST.
+INFO:root:2018-10-31 17:25:37 [OK!] Client [127.0.0.1 @ 60822] has received full file list.
+INFO:root:2018-10-31 17:25:37 [DIS] Client [127.0.0.1 @ 60822] has disconnected.

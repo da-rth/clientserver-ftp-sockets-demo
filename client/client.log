@@ -216,3 +216,16 @@ INFO:root:2018-10-31 17:20:55 | [OK!] Client startup initialised.
 INFO:root:2018-10-31 17:20:55 | [CMD] Invoking Server Protocol 'GET' command with filename: serverdwdada
 INFO:root:2018-10-31 17:20:55 | [CON] Successfully connected to server at: 127.0.0.1:8080
 INFO:root:2018-10-31 17:20:55 | [ERR] Server response: "FileNotFound" - File could not be found in client directory
+INFO:root:2018-10-31 17:25:18 | [OK!] Client startup initialised.
+INFO:root:2018-10-31 17:25:18 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-10-31 17:25:18 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-10-31 17:25:18 | [DWN] Download Complete 'server.log' [61.05KB / 61.05KB]
+INFO:root:2018-10-31 17:25:18 | [OK!] File saved to: H:\2086380A\Workspace\NOSE2_AE1\client/server.log
+INFO:root:2018-10-31 17:25:18 | [DIS] Disconnected from server.
+INFO:root:2018-10-31 17:25:37 | [OK!] Client startup initialised.
+INFO:root:2018-10-31 17:25:37 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-10-31 17:25:37 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-10-31 17:25:37 | [OK!] Server responded with:
+ - [FIL] server.log
+ - [FIL] server.py
+INFO:root:2018-10-31 17:25:37 | [DIS] Disconnected from server.

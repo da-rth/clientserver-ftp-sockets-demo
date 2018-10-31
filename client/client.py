@@ -227,7 +227,7 @@ class FTPClient:
         self.cli_socket.sendall("LIST".encode())
 
         # If response is empty, log and raise SystemExit. Else, print response.
-        response = self.cli_socket.recv(4096)
+        response = self.cli_socket.recv(16384)
         if response:
             self.log("OK!", "Server responded with:\n%s" % response.decode())
         else:
