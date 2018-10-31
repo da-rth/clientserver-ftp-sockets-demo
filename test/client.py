@@ -101,6 +101,19 @@ class FTPClient:
         return int(port)
     
     def start(self):
+        self.log("OK!", "Client startup initialised.")
+
+        # Parse command list and check if valid command. Also, check if command needs the parameter filename
+        if self.command[0] == "list":
+            self.protocol_commands[self.command[0]]()
+        else:
+            self.protocol_commands[self.command[0]](filename=self.command[1])
+        # After command execution, notify server of disconnect and close socket on client side.
+        self.cli_socket.send(b"DISCONNECT")
+        self.cli_socket.close()
+        self.log("DIS", "Disconnected from server.")
+
+    def connect(self):
         try:
             # Try connect to server. If connection refused, log and raise SystemExit
             self.cli_socket.connect((self.host, self.port))
@@ -108,19 +121,8 @@ class FTPClient:
         except (socket.gaierror, ConnectionRefusedError) as e:
             self.cli_socket.close()
             self.log("ERR", "An error occurred when connecting to host %s:%s\n%s" % (self.host, self.port, str(e)))
-        else:
-            # Parse command list and check if valid command. Also, check if command needs the parameter filename
-            if self.command[0] == "list":
-                self.protocol_commands[self.command[0]]()
-            else:
-                self.protocol_commands[self.command[0]](filename=self.command[1])
-            # After command execution, notify server of disconnect and close socket on client side.
-            self.cli_socket.send(b"DISCONNECT")
-            self.cli_socket.close()
-            self.log("DIS", "Disconnected from server.")
-
+    
     # Command execution
-
     def put_file(self, filename):
 
         # Check file/filename for issues
@@ -140,6 +142,7 @@ class FTPClient:
             self.log("ERR", "FileZeroSized: "+self.protocol_errors["FileZeroSized"])
         
         # Else, send PUT request to server, w/ filename
+        self.connect()
         self.log("CMD", "Invoking Server Protocol 'PUT' command with filename: %s" % filename)
         self.cli_socket.send(("PUT %s" % filename).encode()) 
 
@@ -156,25 +159,27 @@ class FTPClient:
         self.cli_socket.send(file_size.encode())
 
         # Wait for server to respond for filesize received
-        response = self.cli_socket.recv(8).decode()
+        response = self.cli_socket.recv(16).decode()
+
         if response in self.protocol_messages:
 
             self.log("OK!", self.protocol_messages[response])
 
             # Read file and send to server in packets of 4096b
             max_size = self.get_filesize(os.path.getsize(filename))
-            upload_file = open('%s/%s' % (os.getcwd(), filename), 'rb')
             bytes_sent = 0
-            data = upload_file.read(4096)
 
-            while data:
-                self.cli_socket.sendall(data)
-                bytes_sent += len(data)
+            with open('%s/%s' % (os.getcwd(), filename), 'rb') as upload_file:
+
                 data = upload_file.read(4096)
-                curr_size = self.get_filesize(bytes_sent)
-                print("[UPL] Uploading '%s' [%s / %s]" % (filename, curr_size, max_size), end='\r')
+                
+                while data:
+                    self.cli_socket.sendall(data)
+                    bytes_sent += len(data)
+                    data = upload_file.read(4096)
+                    curr_size = self.get_filesize(bytes_sent)
+                    print("[UPL] Uploading '%s' [%s / %s]" % (filename, curr_size, max_size), end='\r')
 
-            upload_file.close()
             self.log("UPL", "Upload Complete '%s' [%s / %s]" % (filename, curr_size, max_size))
             self.log("OK!", "Server has received file '%s' from client" % filename)
 
@@ -186,6 +191,7 @@ class FTPClient:
         if filename in os.listdir(os.getcwd()):
             self.log("ERR", "The file %s already exists in client directory and cannot be over-written. Please move or delete this file first.")
         
+        self.connect()
         self.cli_socket.sendall(("GET " + filename).encode())
 
         # If server responds with a protocol error, log and raise SystemExit
@@ -217,6 +223,7 @@ class FTPClient:
     def show_list(self):
         # send LIST request to server, w/ no other parameters.
         self.log("CMD", "Invoking Server Protocol 'LIST' command.")
+        self.connect()
         self.cli_socket.sendall("LIST".encode())
 
         # If response is empty, log and raise SystemExit. Else, print response.

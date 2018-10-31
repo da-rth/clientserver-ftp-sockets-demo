@@ -644,3 +644,92 @@ INFO:root:2018-10-31 16:58:23 [CMD] Client [127.0.0.1 @ 60599] has executed comm
 INFO:root:2018-10-31 16:58:23 [OK!] Client [127.0.0.1 @ 60599] has received full file list.
 INFO:root:2018-10-31 16:58:23 [DIS] Client [127.0.0.1 @ 60599] has disconnected.
 INFO:root:2018-10-31 16:59:55 [CON] Client [127.0.0.1 @ 60601] has connected.
+INFO:root:2018-10-31 17:04:15 [CON] Client [127.0.0.1 @ 60650] has connected.
+INFO:root:2018-10-31 17:04:22 [CON] Client [127.0.0.1 @ 60651] has connected.
+INFO:root:2018-10-31 17:04:22 [CMD] Client [127.0.0.1 @ 60651] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:04:22 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:04:22 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+WARNING:root:2018-10-31 17:04:22 [ERR] [WinError 10054] An existing connection was forcibly closed by the remote host
+INFO:root:2018-10-31 17:04:22 [DIS] Client [127.0.0.1 @ 60651] has disconnected.
+INFO:root:2018-10-31 17:06:54 [CON] Client [127.0.0.1 @ 60681] has connected.
+INFO:root:2018-10-31 17:07:05 [CON] Client [127.0.0.1 @ 60683] has connected.
+INFO:root:2018-10-31 17:07:05 [CMD] Client [127.0.0.1 @ 60683] has executed command: GET server.log
+INFO:root:2018-10-31 17:07:05 [OK!] File 'server.log' found in server directory. Sending client total file-size.
+INFO:root:2018-10-31 17:07:05 [OK!] Client [127.0.0.1 @ 60683] has downloaded file 'server.log' from server.
+INFO:root:2018-10-31 17:07:05 [DIS] Client [127.0.0.1 @ 60683] has disconnected.
+INFO:root:2018-10-31 17:08:26 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:08:27 [SRV] Server initialised.
+INFO:root:2018-10-31 17:08:27 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:08:29 [CON] Client [127.0.0.1 @ 60691] has connected.
+INFO:root:2018-10-31 17:08:34 [CON] Client [127.0.0.1 @ 60693] has connected.
+INFO:root:2018-10-31 17:08:34 [CMD] Client [127.0.0.1 @ 60693] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:08:34 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:08:43 [CON] Client [127.0.0.1 @ 60694] has connected.
+INFO:root:2018-10-31 17:08:43 [CMD] Client [127.0.0.1 @ 60694] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:08:43 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:08:43 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+WARNING:root:2018-10-31 17:08:43 [ERR] [WinError 10054] An existing connection was forcibly closed by the remote host
+INFO:root:2018-10-31 17:08:43 [DIS] Client [127.0.0.1 @ 60694] has disconnected.
+INFO:root:2018-10-31 17:09:04 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:09:06 [SRV] Server initialised.
+INFO:root:2018-10-31 17:09:06 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:09:07 [CON] Client [127.0.0.1 @ 60696] has connected.
+INFO:root:2018-10-31 17:09:07 [CMD] Client [127.0.0.1 @ 60696] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:09:07 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:09:16 [CON] Client [127.0.0.1 @ 60700] has connected.
+INFO:root:2018-10-31 17:09:16 [CMD] Client [127.0.0.1 @ 60700] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:09:16 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:09:16 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+WARNING:root:2018-10-31 17:09:16 [ERR] [WinError 10054] An existing connection was forcibly closed by the remote host
+INFO:root:2018-10-31 17:09:16 [DIS] Client [127.0.0.1 @ 60700] has disconnected.
+INFO:root:2018-10-31 17:09:26 [CON] Client [127.0.0.1 @ 60701] has connected.
+INFO:root:2018-10-31 17:09:26 [CMD] Client [127.0.0.1 @ 60701] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:09:26 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:11:22 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:11:24 [SRV] Server initialised.
+INFO:root:2018-10-31 17:11:24 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:11:31 [CON] Client [127.0.0.1 @ 60739] has connected.
+INFO:root:2018-10-31 17:11:31 [CMD] Client [127.0.0.1 @ 60739] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:11:31 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:11:31 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+WARNING:root:2018-10-31 17:11:31 [ERR] [WinError 10054] An existing connection was forcibly closed by the remote host
+INFO:root:2018-10-31 17:11:31 [DIS] Client [127.0.0.1 @ 60739] has disconnected.
+INFO:root:2018-10-31 17:15:39 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:15:42 [SRV] Server initialised.
+INFO:root:2018-10-31 17:15:42 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:16:01 [CON] Client [127.0.0.1 @ 60760] has connected.
+INFO:root:2018-10-31 17:16:01 [CMD] Client [127.0.0.1 @ 60760] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:16:01 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:16:01 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+INFO:root:2018-10-31 17:16:01 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/client.log
+INFO:root:2018-10-31 17:16:01 [DIS] Client [127.0.0.1 @ 60760] has disconnected.
+INFO:root:2018-10-31 17:16:59 [CON] Client [127.0.0.1 @ 60767] has connected.
+INFO:root:2018-10-31 17:16:59 [CMD] Client [127.0.0.1 @ 60767] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:16:59 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:17:14 [CON] Client [127.0.0.1 @ 60768] has connected.
+INFO:root:2018-10-31 17:17:14 [CMD] Client [127.0.0.1 @ 60768] has executed command: PUT client.log.
+INFO:root:2018-10-31 17:17:14 [OK!] FileOK: No existing file present, OK to create new file.
+INFO:root:2018-10-31 17:17:14 [OK!] FileSizeReceived: The filesize of file being transferred has successfully been received.
+INFO:root:2018-10-31 17:17:14 [OK!] Client upload complete. File saved to: H:\2086380A\Workspace\NOSE2_AE1/client.log
+INFO:root:2018-10-31 17:17:14 [DIS] Client [127.0.0.1 @ 60768] has disconnected.
+INFO:root:2018-10-31 17:17:55 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:17:57 [SRV] Server initialised.
+INFO:root:2018-10-31 17:17:57 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:18:08 [CON] Client [127.0.0.1 @ 60773] has connected.
+INFO:root:2018-10-31 17:18:08 [CMD] Client [127.0.0.1 @ 60773] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:18:08 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:18:12 [CON] Client [127.0.0.1 @ 60776] has connected.
+INFO:root:2018-10-31 17:20:29 [EXI] Server closed. Goodbye!
+INFO:root:2018-10-31 17:20:31 [SRV] Server initialised.
+INFO:root:2018-10-31 17:20:31 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-10-31 17:20:34 [CON] Client [127.0.0.1 @ 60783] has connected.
+INFO:root:2018-10-31 17:20:34 [CMD] Client [127.0.0.1 @ 60783] has executed command: PUT client.log.
+WARNING:root:2018-10-31 17:20:34 [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-10-31 17:20:48 [CON] Client [127.0.0.1 @ 60785] has connected.
+INFO:root:2018-10-31 17:20:48 [CMD] Client [127.0.0.1 @ 60785] has executed command: GET server.log
+INFO:root:2018-10-31 17:20:48 [OK!] File 'server.log' found in server directory. Sending client total file-size.
+INFO:root:2018-10-31 17:20:48 [OK!] Client [127.0.0.1 @ 60785] has downloaded file 'server.log' from server.
+INFO:root:2018-10-31 17:20:48 [DIS] Client [127.0.0.1 @ 60785] has disconnected.
+INFO:root:2018-10-31 17:20:55 [CON] Client [127.0.0.1 @ 60786] has connected.
+INFO:root:2018-10-31 17:20:55 [CMD] Client [127.0.0.1 @ 60786] has executed command: GET serverdwdada
+WARNING:root:2018-10-31 17:20:55 [ERR] FileNotFound: File could not be found in client directory

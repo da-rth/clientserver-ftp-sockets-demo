@@ -78,10 +78,6 @@ class FTPServer(threading.Thread):
         if ctype == "ERR":
             logging.warning("%s %s" % (date, line))
             print(line)
-
-        elif ctype == "SRV":
-            logging.info("\n%s %s" % (date, line))
-            print(line)
         
         else:
             logging.info("%s %s" % (date, line))
@@ -161,16 +157,20 @@ class FTPServer(threading.Thread):
         self.current_conn['socket'].sendall(b"FileSizeReceived")
         self.log("OK!", "FileSizeReceived: "+self.protocol_messages["FileSizeReceived"])
 
+
         with open(filename, 'wb') as download_file:
-           
+            data = self.current_conn['socket'].recv(4096)
             bytes_collected = 0
 
-            while bytes_collected < file_size:
-                data = self.current_conn['socket'].recv(4096)
+            while data and (bytes_collected < file_size):
                 bytes_collected += len(data)
                 download_file.write(data)
+                if len(data) < 4096:
+                    break
+                else:
+                    data = self.current_conn['socket'].recv(4096)
 
-            self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
+        self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
 
     def disconnect(self, conn):
         try:
