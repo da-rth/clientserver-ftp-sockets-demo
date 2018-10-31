@@ -635,12 +635,3 @@ WARNING:root:2018-10-31 16:56:38 [ERR] FileNotFound: File could not be found in 
 INFO:root:2018-10-31 16:56:47 [CON] Client [127.0.0.1 @ 60594] has connected.
 INFO:root:2018-10-31 16:56:47 [CMD] Client [127.0.0.1 @ 60594] has executed command: GET server.log
 INFO:root:2018-10-31 16:56:47 [OK!] File 'server.log' found in server directory. Sending client total file-size.
-INFO:root:2018-10-31 16:56:47 [OK!] Client [127.0.0.1 @ 60594] has downloaded file 'server.log' from server.
-INFO:root:2018-10-31 16:56:47 [DIS] Client [127.0.0.1 @ 60594] has disconnected.
-INFO:root:2018-10-31 16:57:06 [CON] Client [127.0.0.1 @ 60595] has connected.
-INFO:root:2018-10-31 16:58:18 [CON] Client [127.0.0.1 @ 60598] has connected.
-INFO:root:2018-10-31 16:58:23 [CON] Client [127.0.0.1 @ 60599] has connected.
-INFO:root:2018-10-31 16:58:23 [CMD] Client [127.0.0.1 @ 60599] has executed command: LIST.
-INFO:root:2018-10-31 16:58:23 [OK!] Client [127.0.0.1 @ 60599] has received full file list.
-INFO:root:2018-10-31 16:58:23 [DIS] Client [127.0.0.1 @ 60599] has disconnected.
-INFO:root:2018-10-31 16:59:55 [CON] Client [127.0.0.1 @ 60601] has connected.

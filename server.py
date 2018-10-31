@@ -29,6 +29,19 @@ class FTPServer(threading.Thread):
             "LIST": self.list_files,
             "DISCONNECT": self.disconnect
         }
+        self.protocol_errors = {
+            "FileAlreadyExists": "File already exists in current directory (cannot be over-written)",
+            "FileNotFound": "File could not be found in client directory",
+            "FileTooLarge": "File is too large to transfer (over 5GB in size)",
+            "FileZeroSized": "File is a zero-sized file (does not contain data)",
+            "FileNameTooLong": "Filename of file is too long (over 255 chars)",
+            "FileIsDirectory": "File is actually a directory (folder containing files)"
+        }
+
+        self.protocol_messages = {
+            "FileOK": "No existing file present, OK to create new file.",
+            "FileSizeReceived": "The filesize of file being transferred has successfully been received."
+        }
     
     @staticmethod
     def clear_terminal():
@@ -64,10 +77,12 @@ class FTPServer(threading.Thread):
 
         if ctype == "ERR":
             logging.warning("%s %s" % (date, line))
+            print(line)
 
         elif ctype == "SRV":
             logging.info("\n%s %s" % (date, line))
             print(line)
+        
         else:
             logging.info("%s %s" % (date, line))
             print(line)
@@ -75,23 +90,40 @@ class FTPServer(threading.Thread):
     # Commands
     def list_files(self):
         ip, port = self.current_conn['address']
-        self.log("CMD", "Client [%s:%s] has executed command: LIST." % (ip, port))
+        self.log("CMD", "Client [%s @ %s] has executed command: LIST." % (ip, port))
 
         files_dirs = os.listdir(self.dir)
         file_list = "\n".join([" - [DIR] "+file if os.path.isdir(file) else " - [FIL] "+file for file in files_dirs])
 
         self.current_conn['socket'].sendall(file_list.encode('utf'))
-        self.log("OK!", "Client [%s:%s] has received full file list." % (ip, port))
+        self.log("OK!", "Client [%s @ %s] has received full file list." % (ip, port))
 
     def send_file(self):
         ip, port = self.current_conn['address']
         filename = self.current_conn['command'][1]
 
-        self.log("CMD", "Client [%s:%s] has executed command: GET %s" % (ip, port, filename))
+        self.log("CMD", "Client [%s @ %s] has executed command: GET %s" % (ip, port, filename))
 
-        if filename not in os.listdir(self.dir):
+        # Check file/filename for security/file issues
+        if filename not in os.listdir(os.getcwd()):
             self.current_conn['socket'].sendall(b"FileNotFound")
-            self.log("ERR", "File '%s' could not be found in server directory. Notifying client." % filename)
+            self.log("ERR", "FileNotFound: "+self.protocol_errors["FileNotFound"])
+        
+        elif len(filename) > 255:
+            self.current_conn['socket'].sendall(b"FileNameTooLong")
+            self.log("ERR", "FileNameTooLong: "+self.protocol_errors["FileNameTooLong"])
+        
+        elif os.path.isdir('%s/%s' % (os.getcwd(), filename)):
+            self.current_conn['socket'].sendall(b"FileIsDirectory")
+            self.log("ERR", "FileIsDirectory: "+self.protocol_errors["FileIsDirectory"])
+        
+        elif os.path.getsize(('%s/%s' % (os.getcwd(), filename))) > 5368709120:
+            self.current_conn['socket'].sendall(b"FileTooLarge")
+            self.log("ERR", "FileTooLarge: "+self.protocol_errors["FileTooLarge"])
+        
+        elif os.path.getsize(('%s/%s' % (os.getcwd(), filename))) == 0:
+            self.current_conn['socket'].sendall(b"FileZeroSized")
+            self.log("ERR", "FileZeroSized: "+self.protocol_errors["FileZeroSized"])
         
         else:
             self.log("OK!", "File '%s' found in server directory. Sending client total file-size." % filename)
@@ -107,23 +139,27 @@ class FTPServer(threading.Thread):
                 self.current_conn['socket'].sendall(data)
                 data = upload.read(4096)
             
-            self.log("OK!", "Client [%s:%s] has downloaded file '%s' from server." % (ip, port, filename))
+            self.log("OK!", "Client [%s @ %s] has downloaded file '%s' from server." % (ip, port, filename))
 
     def save_file(self):
+        
         ip, port = self.current_conn['address']
         filename = self.current_conn['command'][1]
-
-        self.log("CMD", "Client [%s:%s] has executed command: PUT %s." % (ip, port, filename))
-        response = self.current_conn['socket'].recv(1024).decode()
-
-        if response == "FileNotFound":
-            self.log("ERR", "Client response: %s - '%s' does not exist in current client directory." % (response, filename))
-            return
+        self.log("CMD", "Client [%s @ %s] has executed command: PUT %s." % (ip, port, filename))
         
+        if filename in os.listdir(os.getcwd()):
+            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"])
+            self.current_conn['socket'].send(b"FileAlreadyExists")
+            return
+        else:
+            self.log("OK!", "FileOK: "+self.protocol_messages["FileOK"])
+            self.current_conn['socket'].send(b"FileOK")
+        
+        response = self.current_conn['socket'].recv(1024).decode()
         file_size = int(response)
 
-        self.current_conn['socket'].sendall(b"RECEIVED")
-        self.log("OK!", "Recieved file size for '%s' from server: %s." % (filename, file_size))
+        self.current_conn['socket'].sendall(b"FileSizeReceived")
+        self.log("OK!", "FileSizeReceived: "+self.protocol_messages["FileSizeReceived"])
 
         with open(filename, 'wb') as download_file:
            
@@ -138,7 +174,7 @@ class FTPServer(threading.Thread):
 
     def disconnect(self, conn):
         try:
-            self.log("DIS", "Client [%s:%s] has disconnected." % conn.getpeername())
+            self.log("DIS", "Client [%s @ %s] has disconnected." % conn.getpeername())
             conn.close()
             self.conns.remove(conn)
         except socket.error:
@@ -157,7 +193,7 @@ class FTPServer(threading.Thread):
                     try:
                         cli_sock, (ip, port) = self.srv_socket.accept()
                         self.conns.append(cli_sock)
-                        self.log("CON", "Client [%s:%s] has connected." % (ip, port))
+                        self.log("CON", "Client [%s @ %s] has connected." % (ip, port))
                     except socket.error:
                         break
                 else:
@@ -199,6 +235,7 @@ class FTPServer(threading.Thread):
         self.srv_socket.bind(('', self.port))
         self.srv_socket.listen(10)
 
+        # Add server socket to list of connections and set running to True
         self.conns.append(self.srv_socket)
         self.server_is_running = True
 
@@ -207,8 +244,11 @@ class FTPServer(threading.Thread):
         print()
 
         try:
+            # Begin waiting for/looping through socket connections
             self.loop_socket_check()
         except KeyboardInterrupt:
+            # If user presses CTRL+C, catch interrupt and print message. 
+            # Interrupt is sometimes delayed...
             self.server_is_running = False
             self.log("EXI", "Server closed. Goodbye!")
         finally:
