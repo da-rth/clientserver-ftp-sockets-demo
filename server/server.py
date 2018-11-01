@@ -6,6 +6,18 @@ import threading
 import logging
 import datetime
 
+"""
+server.py - NOSE 2 - Assessment 1
+
+Authors: - Daniel Arthur [2086380A]
+         - Kieran Watson [2318086W]
+
+FTPServer object requires:
+- PORT (Integer value between 0-99999)
+
+CTRL+C to exit server (may take some time)
+"""
+
 class FTPServer(threading.Thread):
 
     def __init__(self):
@@ -22,11 +34,10 @@ class FTPServer(threading.Thread):
             "PUT": self.save_file,
             "GET": self.send_file,
             "LIST": self.list_files,
-            "DISCONNECT": self.disconnect
         }
         self.protocol_errors = {
-            "FileAlreadyExists": "File already exists in current directory (cannot be over-written)",
-            "FileNotFound": "File could not be found in client directory",
+            "FileAlreadyExists": "File already exists in current directory",
+            "FileNotFound": "File could not be found in current directory",
             "FileTooLarge": "File is too large to transfer (over 5GB in size)",
             "FileZeroSized": "File is a zero-sized file (does not contain data)",
             "FileNameTooLong": "Filename of file is too long (over 255 chars)",
@@ -34,7 +45,7 @@ class FTPServer(threading.Thread):
         }
 
         self.protocol_messages = {
-            "FileOK": "No existing file present, OK to create new file.",
+            "FileOkTransfer": "No existing file present, OK to create new file.",
             "FileSizeReceived": "The filesize of file being transferred has successfully been received."
         }
     
@@ -98,7 +109,7 @@ class FTPServer(threading.Thread):
         # Check file/filename for security/file issues
         if filename not in os.listdir(os.getcwd()):
             self.current_conn['socket'].sendall(b"FileNotFound")
-            self.log("ERR", "FileNotFound: "+self.protocol_errors["FileNotFound"])
+            self.log("ERR", "FileNotFound: "+self.protocol_errors["FileNotFound"]+" (server).")
         
         elif len(filename) > 255:
             self.current_conn['socket'].sendall(b"FileNameTooLong")
@@ -139,12 +150,12 @@ class FTPServer(threading.Thread):
         self.log("CMD", "Client [%s @ %s] has executed command: PUT %s." % (ip, port, filename))
         
         if filename in os.listdir(os.getcwd()):
-            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"])
+            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"]+" (server).")
             self.current_conn['socket'].send(b"FileAlreadyExists")
             return
         else:
-            self.log("OK!", "FileOK: "+self.protocol_messages["FileOK"])
-            self.current_conn['socket'].send(b"FileOK")
+            self.log("OK!", "FileOkTransfer: "+self.protocol_messages["FileOkTransfer"])
+            self.current_conn['socket'].send(b"FileOkTransfer")
         
         response = self.current_conn['socket'].recv(1024).decode()
         file_size = int(response)
@@ -185,6 +196,7 @@ class FTPServer(threading.Thread):
             for connection in read_connections:
 
                 if connection == self.srv_socket:
+                    # Check for incoming client connections and add to connection list
                     try:
                         cli_sock, (ip, port) = self.srv_socket.accept()
                         self.conns.append(cli_sock)
@@ -193,19 +205,27 @@ class FTPServer(threading.Thread):
                         break
                 else:
                     try:
+                        # Request the command from client, split and put into self.current_conn, w/ socket and address
+                        request = connection.recv(1024).decode()
 
-                        self.current_conn = {
-                            'socket': connection,
-                            'command': connection.recv(1024).decode().split(" "),
-                            'address': connection.getpeername()
-                        }
+                        if request:
 
-                        command_type = self.current_conn['command'][0] if self.current_conn['command'] else None
-
-                        if command_type == "DISCONNECT":
-                            self.disconnect(connection)
-                        elif command_type:
-                            self.commands[command_type]()
+                            command_type = request.split(" ")[0] if request else None
+                            
+                            if command_type == "DISCONNECT":
+                                self.disconnect(connection)
+                            
+                            elif command_type in self.commands:
+                                self.current_conn = {
+                                    'socket': connection,
+                                    'command': request.split(" "),
+                                    'address': connection.getpeername()
+                                }
+                                self.commands[command_type]()
+                            
+                            else:
+                                self.log("ERR", "The request %s is not a valid protocol command. Ignoring.")
+                                continue
 
                     except socket.error as e:
                         self.log("ERR", str(e))

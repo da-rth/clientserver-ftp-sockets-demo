@@ -229,3 +229,167 @@ INFO:root:2018-10-31 17:25:37 | [OK!] Server responded with:
  - [FIL] server.log
  - [FIL] server.py
 INFO:root:2018-10-31 17:25:37 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:27:27 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:27:27 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:27:27 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:27:27 | [ERR] Server responded without a file list.
+INFO:root:2018-11-01 18:28:38 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:28:38 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:28:38 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:28:38 | [ERR] Server responded without a file list.
+INFO:root:2018-11-01 18:29:17 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:29:17 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:29:17 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:29:17 | [OK!] Server responded with:
+ - [FIL] server.log
+ - [FIL] server.py
+INFO:root:2018-11-01 18:29:47 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:29:47 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:29:48 | [ERR] An error occurred when connecting to host 127.0.0.1:8080
+[WinError 10061] No connection could be made because the target machine actively refused it
+INFO:root:2018-11-01 18:29:52 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:29:52 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:29:52 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:29:52 | [OK!] Server responded with:
+ - [FIL] server.log
+ - [FIL] server.py
+INFO:root:2018-11-01 18:29:52 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:30:07 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:30:07 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 18:30:07 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:30:07 | [OK!] Server responded with:
+ - [FIL] server.log
+ - [FIL] server.py
+INFO:root:2018-11-01 18:30:07 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:30:18 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:30:18 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-11-01 18:30:18 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:31:33 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:31:33 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-11-01 18:31:33 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:31:34 | [DWN] Download Complete 'server.log' [3.83MB / 3.83MB]
+INFO:root:2018-11-01 18:31:34 | [OK!] File saved to: H:\2086380A\Workspace\NOSE2_AE1\client/server.log
+INFO:root:2018-11-01 18:31:34 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:31:45 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:31:45 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:31:45 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:31:45 | [OK!] FileOkTransfer: No existing file present, OK to create new file.
+INFO:root:2018-11-01 18:31:45 | [OK!] File 'client.log' found in client directory. Sending filesize to server.
+INFO:root:2018-11-01 18:31:45 | [OK!] The filesize of file being transferred has successfully been received.
+INFO:root:2018-11-01 18:31:45 | [UPL] Upload Complete 'client.log' [22.52KB / 22.52KB]
+INFO:root:2018-11-01 18:31:45 | [OK!] Server has received file 'client.log' from client
+INFO:root:2018-11-01 18:31:45 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:32:05 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:32:05 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:32:05 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:32:05 | [OK!] FileOkTransfer: No existing file present, OK to create new file.
+INFO:root:2018-11-01 18:32:05 | [OK!] File 'client.log' found in client directory. Sending filesize to server.
+INFO:root:2018-11-01 18:32:05 | [OK!] The filesize of file being transferred has successfully been received.
+INFO:root:2018-11-01 18:32:05 | [UPL] Upload Complete 'client.log' [23.33KB / 23.33KB]
+INFO:root:2018-11-01 18:32:05 | [OK!] Server has received file 'client.log' from client
+INFO:root:2018-11-01 18:32:05 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:34:02 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:34:02 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-11-01 18:34:03 | [ERR] An error occurred when connecting to host 127.0.0.1:8080
+[WinError 10061] No connection could be made because the target machine actively refused it
+INFO:root:2018-11-01 18:34:14 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:34:14 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-11-01 18:34:14 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:34:14 | [DWN] Download Complete 'server.log' [3.83MB / 3.83MB]
+INFO:root:2018-11-01 18:34:14 | [OK!] File saved to: H:\2086380A\Workspace\NOSE2_AE1\client/server.log
+INFO:root:2018-11-01 18:34:14 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:34:22 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:34:22 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:34:22 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:34:22 | [OK!] FileOkTransfer: No existing file present, OK to create new file.
+INFO:root:2018-11-01 18:34:22 | [OK!] File 'client.log' found in client directory. Sending filesize to server.
+INFO:root:2018-11-01 18:34:22 | [OK!] The filesize of file being transferred has successfully been received.
+INFO:root:2018-11-01 18:34:22 | [UPL] Upload Complete 'client.log' [25.00KB / 25.00KB]
+INFO:root:2018-11-01 18:34:22 | [OK!] Server has received file 'client.log' from client
+INFO:root:2018-11-01 18:34:22 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:34:24 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:34:24 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:34:24 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:34:24 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:35:23 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:35:23 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:35:23 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:35:23 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:35:53 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:35:53 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:35:53 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:35:53 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:36:12 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:36:12 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:36:12 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:36:12 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:37:47 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:37:47 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:37:47 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:37:47 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:39:06 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:39:06 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:39:06 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:39:06 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:40:10 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:40:10 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:40:10 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:40:10 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:40:10 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:41:16 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:41:17 | [ERR] An error occurred when connecting to host 127.0.0.1:8080
+[WinError 10061] No connection could be made because the target machine actively refused it
+INFO:root:2018-11-01 18:41:26 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:41:27 | [ERR] An error occurred when connecting to host 127.0.0.1:8080
+[WinError 10061] No connection could be made because the target machine actively refused it
+INFO:root:2018-11-01 18:42:13 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:42:14 | [ERR] An error occurred when connecting to host 127.0.0.1:8080
+[WinError 10061] No connection could be made because the target machine actively refused it
+INFO:root:2018-11-01 18:42:23 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:42:23 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:42:23 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:42:23 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:42:23 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:42:30 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:42:30 | [CMD] Invoking Server Protocol 'GET' command with filename: client.log
+INFO:root:2018-11-01 18:42:30 | [ERR] The file %s already exists in client directory and cannot be over-written. Please move or delete this file first.
+INFO:root:2018-11-01 18:43:48 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:43:48 | [CMD] Invoking Server Protocol 'GET' command with filename: client.log
+INFO:root:2018-11-01 18:43:48 | [ERR] FileAlreadyExists: File already exists in current directory (cannot be over-written)
+INFO:root:2018-11-01 18:45:06 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:45:06 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:45:06 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:45:06 | [ERR] FileAlreadyExists: File already exists in current directory
+INFO:root:2018-11-01 18:45:06 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:45:43 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:45:43 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:45:43 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:45:43 | [ERR] FileAlreadyExists: File already exists in current directory
+INFO:root:2018-11-01 18:45:43 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 18:45:45 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:45:45 | [CMD] Invoking Server Protocol 'GET' command with filename: client.log
+INFO:root:2018-11-01 18:45:45 | [ERR] FileAlreadyExists: File already exists in current directory
+INFO:root:2018-11-01 18:47:16 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:47:16 | [CMD] Invoking Server Protocol 'GET' command with filename: client.log
+INFO:root:2018-11-01 18:47:16 | [ERR] FileAlreadyExists: File already exists in current directory (client).
+INFO:root:2018-11-01 18:47:35 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 18:47:35 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 18:47:35 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 18:47:35 | [ERR] FileAlreadyExists: File already exists in current directory
+INFO:root:2018-11-01 18:47:35 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 19:02:31 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 19:02:31 | [CMD] Invoking Server Protocol 'GET' command with filename: client.log
+INFO:root:2018-11-01 19:02:31 | [ERR] FileAlreadyExists: File already exists in current directory (client).
+INFO:root:2018-11-01 19:02:34 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 19:02:34 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 19:02:34 | [CMD] Invoking Server Protocol 'PUT' command with filename: client.log
+INFO:root:2018-11-01 19:02:34 | [ERR] FileAlreadyExists: File already exists in current directory
+INFO:root:2018-11-01 19:02:34 | [DIS] Disconnected from server.
+INFO:root:2018-11-01 19:02:42 | [OK!] Client startup initialised.
+INFO:root:2018-11-01 19:02:42 | [CMD] Invoking Server Protocol 'LIST' command.
+INFO:root:2018-11-01 19:02:42 | [CON] Successfully connected to server at: 127.0.0.1:8080
+INFO:root:2018-11-01 19:02:42 | [OK!] Server responded with:
+ - [FIL] client.log
+ - [FIL] server.log
+ - [FIL] server.py
+INFO:root:2018-11-01 19:02:42 | [DIS] Disconnected from server.

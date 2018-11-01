@@ -7,15 +7,17 @@ import logging
 import datetime
 
 """
-Client.py
-Author: 2086380A
-NOSE 2 - Assessment 1
+client.py - NOSE 2 - Assessment 1
 
-Requires parameters: <domain/ip> <port> <put filename | get filename | list>
+Authors: - Daniel Arthur [2086380A]
+         - Kieran Watson [2318086W]
+
 FTPClient object requires:
 - HOST (IP address or domain)
 - PORT (Integer value between 0-99999)
-- COMMAND (String LIST|PUT|GET followed by Filename) 
+- COMMANDS (List of Strings: LIST|PUT|GET followed by filename) 
+
+CTRL+C to exit client
 """
 
 EXAMPLE_INPUT = "\n - Example input: python client.py <domain/ip> <port> <put filename|get filename|list>"
@@ -36,8 +38,8 @@ class FTPClient:
         }
 
         self.protocol_errors = {
-            "FileAlreadyExists": "File already exists in current directory (cannot be over-written)",
-            "FileNotFound": "File could not be found in client directory",
+            "FileAlreadyExists": "File already exists in current directory",
+            "FileNotFound": "File could not be found in current directory",
             "FileTooLarge": "File is too large to transfer (over 5GB in size)",
             "FileZeroSized": "File is a zero-sized file (does not contain data)",
             "FileNameTooLong": "Filename of file is too long (over 255 chars)",
@@ -45,18 +47,23 @@ class FTPClient:
         }
 
         self.protocol_messages = {
-            "FileOK": "No existing file present, OK to create new file.",
+            "FileOkTransfer": "No existing file present, OK to create new file.",
             "FileSizeReceived": "The filesize of file being transferred has successfully been received."
         }
     
-    @staticmethod
-    def log(ctype, message):
+    def log(self, ctype, message):
         # Logs passed message with date and time to client.log
         date = str(datetime.datetime.now()).split(".")[0]
         line = "[%s] %s" % (ctype, message)
         logging.info("%s | %s" % (date, line))
 
         if ctype == "ERR":
+
+            try:
+                self.disconnect()
+            except OSError:
+                pass
+            
             raise SystemExit("[ERR] %s" % message)
         print(line)
 
@@ -109,9 +116,7 @@ class FTPClient:
         else:
             self.protocol_commands[self.command[0]](filename=self.command[1])
         # After command execution, notify server of disconnect and close socket on client side.
-        self.cli_socket.send(b"DISCONNECT")
-        self.cli_socket.close()
-        self.log("DIS", "Disconnected from server.")
+        self.disconnect()
 
     def connect(self):
         try:
@@ -121,6 +126,11 @@ class FTPClient:
         except (socket.gaierror, ConnectionRefusedError) as e:
             self.cli_socket.close()
             self.log("ERR", "An error occurred when connecting to host %s:%s\n%s" % (self.host, self.port, str(e)))
+    
+    def disconnect(self):
+        # Notify server of disconnect, then close client.
+        self.cli_socket.send(b"DISCONNECT")
+        self.log("DIS", "Disconnected from server.")
     
     # Command execution
     def put_file(self, filename):
@@ -189,7 +199,7 @@ class FTPClient:
 
         # If filename exists in client directory, do not continue
         if filename in os.listdir(os.getcwd()):
-            self.log("ERR", "The file %s already exists in client directory and cannot be over-written. Please move or delete this file first.")
+            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"]+" (client).")
         
         self.connect()
         self.cli_socket.sendall(("GET " + filename).encode())
