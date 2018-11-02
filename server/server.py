@@ -148,6 +148,8 @@ class FTPServer(threading.Thread):
 
             upload = open(self.dir+'/'+filename, 'rb')
             data = upload.read(4096)
+
+            self.log("UPL", "Sending file '%s' to Client [%s @ %s]. This may take a while..." % (filename, ip, port))
             
             while data:
                 self.current_conn['socket'].sendall(data)

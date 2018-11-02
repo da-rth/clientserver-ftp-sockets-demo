@@ -11515,3 +11515,18 @@ INFO:root:2018-11-02 14:42:04 [EXI] Server closed. Goodbye!
 INFO:root:2018-11-02 14:42:21 [SRV] Server initialised.
 INFO:root:2018-11-02 14:42:21 [OK!] Waiting for client(s) to connect...
 INFO:root:2018-11-02 14:42:27 [EXI] Server closed. Goodbye!
+INFO:root:2018-11-02 14:50:07 [SRV] Server initialised.
+INFO:root:2018-11-02 14:50:07 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-11-02 14:50:28 [CON] Client [192.168.1.199 @ 51017] has connected.
+INFO:root:2018-11-02 14:50:28 [CMD] Client [192.168.1.199 @ 51017] has executed command: GET test.mp4
+WARNING:root:2018-11-02 14:50:28 [ERR] FileNotFound: File could not be found in current directory (server).
+INFO:root:2018-11-02 14:50:28 [DIS] Client [192.168.1.199 @ 51017] has disconnected.
+INFO:root:2018-11-02 14:50:33 [EXI] Server closed. Goodbye!
+INFO:root:2018-11-02 14:50:40 [SRV] Server initialised.
+INFO:root:2018-11-02 14:50:40 [OK!] Waiting for client(s) to connect...
+INFO:root:2018-11-02 14:51:14 [CON] Client [192.168.1.199 @ 51020] has connected.
+INFO:root:2018-11-02 14:51:14 [CMD] Client [192.168.1.199 @ 51020] has executed command: GET server.log
+INFO:root:2018-11-02 14:51:14 [OK!] File 'server.log' found in server directory. Sending client total file-size.
+INFO:root:2018-11-02 14:51:14 [UPL] Sending file 'server.log' to Client [192.168.1.199 @ 51020]. This may take a while...
+INFO:root:2018-11-02 14:51:15 [OK!] Client [192.168.1.199 @ 51020] has downloaded file 'server.log' from server.
+INFO:root:2018-11-02 14:51:37 [EXI] Server closed. Goodbye!

@@ -79,3 +79,18 @@ INFO:root:2018-11-02 14:41:55 | [CMD] Invoking Server Protocol 'GET' command wit
 INFO:root:2018-11-02 14:41:55 | [CON] Successfully connected to server at: 127.0.0.1:8080
 INFO:root:2018-11-02 14:41:55 | [DWN] Download Complete 'server.log' [1.78MB / 1.78MB]
 INFO:root:2018-11-02 14:41:55 | [OK!] File saved to: /Users/den/Development/NOSE2_AE1/client/server.log
+INFO:root:2018-11-02 14:45:22 | [OK!] Client startup initialised.
+INFO:root:2018-11-02 14:45:22 | [CMD] Invoking Server Protocol 'GET' command with filename: server.log
+INFO:root:2018-11-02 14:45:22 | [CON] Successfully connected to server at: 192.168.1.199:8080
+INFO:root:2018-11-02 14:47:10 | [DWN] Download Complete 'server.log' [15.05MB / 15.05MB]
+INFO:root:2018-11-02 14:47:10 | [OK!] File saved to: /Users/den/Development/NOSE2_AE1/client/server.log
+INFO:root:2018-11-02 14:47:53 | [OK!] Client startup initialised.
+INFO:root:2018-11-02 14:47:53 | [CMD] Invoking Server Protocol 'GET' command with filename: test.mp4
+INFO:root:2018-11-02 14:47:53 | [CON] Successfully connected to server at: 192.168.1.199:8080
+INFO:root:2018-11-02 14:47:53 | [ERR] Server response: "FileNotFound" - File could not be found in current directory
+INFO:root:2018-11-02 14:47:53 | [DIS] Disconnected from server.
+INFO:root:2018-11-02 14:48:10 | [OK!] Client startup initialised.
+INFO:root:2018-11-02 14:48:10 | [CMD] Invoking Server Protocol 'GET' command with filename: test.mp4
+INFO:root:2018-11-02 14:48:14 | [CON] Successfully connected to server at: 192.168.1.199:8080
+INFO:root:2018-11-02 14:49:02 | [DWN] Download Complete 'test.mp4' [3.79MB / 3.79MB]
+INFO:root:2018-11-02 14:49:02 | [OK!] File saved to: /Users/den/Development/NOSE2_AE1/client/test.mp4
