@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 import socket
@@ -49,6 +50,17 @@ class FTPServer(threading.Thread):
             "FileSizeReceived": "The filesize of file being transferred has successfully been received."
         }
     
+    @staticmethod
+    def get_filesize(size_bytes):
+        # Converts bytes to larger suffix
+        # Returns converted filesize as a string
+        sizes = ['B', 'KB', 'MB', 'GB']
+        i = 0
+        while size_bytes > 1024 and i < 5:
+            size_bytes = size_bytes / 1024.00
+            i += 1
+        return "%0.2f%s" % (size_bytes, sizes[i])
+
     @staticmethod
     def clear_terminal():
         os.system('clear' if os.name != 'nt' else 'cls')
@@ -148,35 +160,35 @@ class FTPServer(threading.Thread):
         ip, port = self.current_conn['address']
         filename = self.current_conn['command'][1]
         self.log("CMD", "Client [%s @ %s] has executed command: PUT %s." % (ip, port, filename))
-        
+
+        # If filename exists in client directory, do not continue
         if filename in os.listdir(os.getcwd()):
-            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"]+" (server).")
-            self.current_conn['socket'].send(b"FileAlreadyExists")
-            return
+            self.current_conn['socket'].sendall(b"FileAlreadyExists")
+            self.log("ERR", "FileAlreadyExists: "+self.protocol_errors["FileAlreadyExists"]+" (client).")
         else:
-            self.log("OK!", "FileOkTransfer: "+self.protocol_messages["FileOkTransfer"])
-            self.current_conn['socket'].send(b"FileOkTransfer")
-        
-        response = self.current_conn['socket'].recv(1024).decode()
-        file_size = int(response)
+            self.current_conn['socket'].sendall(b"FileOkTransfer")
 
-        self.current_conn['socket'].sendall(b"FileSizeReceived")
-        self.log("OK!", "FileSizeReceived: "+self.protocol_messages["FileSizeReceived"])
+            # If server responds with a protocol error, log and raise SystemExit
+            response = self.current_conn['socket'].recv(1024).decode()
 
-
-        with open(filename, 'wb') as download_file:
-            data = self.current_conn['socket'].recv(4096)
+            # Else server has resonded with filesize. Continue with downloading file.
+            file_size = int(response)
             bytes_collected = 0
+            max_size = self.get_filesize(file_size)
+            download_file = open(filename, 'wb')
 
-            while data and (bytes_collected < file_size):
+            # Write downloded byte data to a file named by filename received form server.
+            while bytes_collected < file_size:
+                data = self.current_conn['socket'].recv(4096)
                 bytes_collected += len(data)
+                current_size = self.get_filesize(bytes_collected)
                 download_file.write(data)
-                if len(data) < 4096:
-                    break
-                else:
-                    data = self.current_conn['socket'].recv(4096)
-
-        self.log("OK!", "Client upload complete. File saved to: %s/%s" % (self.dir, filename))
+                print("[DWN] Downloading '%s' [%s / %s]" % (filename, current_size, max_size), end='\r')
+            
+            # Once filesize matches the downloaded bytes we have received, close file (download complete).
+            download_file.close()
+            self.log("DWN", "Download Complete '%s' [%s / %s]" % (filename, current_size, max_size))
+            self.log("OK!", "File saved to: %s/%s" % (os.getcwd(), filename))
 
     def disconnect(self, conn):
         try:
@@ -206,12 +218,12 @@ class FTPServer(threading.Thread):
                 else:
                     try:
                         # Request the command from client, split and put into self.current_conn, w/ socket and address
-                        request = connection.recv(1024).decode()
+                        request = connection.recv(1024).decode('latin-1')
 
                         if request:
 
                             command_type = request.split(" ")[0] if request else None
-                            
+
                             if command_type == "DISCONNECT":
                                 self.disconnect(connection)
                             
@@ -224,7 +236,6 @@ class FTPServer(threading.Thread):
                                 self.commands[command_type]()
                             
                             else:
-                                self.log("ERR", "The request %s is not a valid protocol command. Ignoring.")
                                 continue
 
                     except socket.error as e:
