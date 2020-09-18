@@ -1,6 +1,7 @@
 # Client Server FTP
 
-A python client-server file transfer protocol system
+A python client-server file transfer protocol system.
+
 This project makes use of the python sockets library and demonstrates client-server communication.
 
 Features:
