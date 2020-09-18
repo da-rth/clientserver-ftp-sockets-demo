@@ -1,4 +1,4 @@
-# Networks & Operating Systems Essentials 2 - Assessed Exercise 1
+# Client Server FTP
 
 A python client-server file transfer protocol system written as an assessed exercise for UoG Level 2 course Networks and Operating Systems Essentials 2.
 
