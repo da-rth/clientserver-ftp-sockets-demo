@@ -1,7 +1,6 @@
 # Client Server FTP
 
-A python client-server file transfer protocol system written as an assessed exercise for UoG Level 2 course Networks and Operating Systems Essentials 2.
-
+A python client-server file transfer protocol system
 This project makes use of the python sockets library and demonstrates client-server communication.
 
 Features:
