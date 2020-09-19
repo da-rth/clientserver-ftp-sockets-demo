@@ -2,6 +2,8 @@
 
 A client-server file transfer protocol system written in Python which utilises web sockets.
 
+![Server Output](https://i.imgur.com/CFIS2y3.png)
+
 ### Features:
 - File upload/download between client and server
 - Client and server request logging
