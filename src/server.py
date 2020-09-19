@@ -8,11 +8,6 @@ import logging
 import datetime
 
 """
-server.py - NOSE 2 - Assessment 1
-
-Authors: - Daniel Arthur [2086380A]
-         - Kieran Watson [2318086W]
-
 FTPServer object requires:
 - PORT (Integer value between 0-99999)
 

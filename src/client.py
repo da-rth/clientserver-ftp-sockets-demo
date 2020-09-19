@@ -7,11 +7,6 @@ import logging
 import datetime
 
 """
-client.py - NOSE 2 - Assessment 1
-
-Authors: - Daniel Arthur [2086380A]
-         - Kieran Watson [2318086W]
-
 FTPClient object requires:
 - HOST (IP address or domain)
 - PORT (Integer value between 0-99999)
